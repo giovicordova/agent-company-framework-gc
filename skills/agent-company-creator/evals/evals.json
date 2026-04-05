@@ -1,0 +1,68 @@
+{
+  "skill_name": "agent-company-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm launching a craft brewery in Bristol and need a website with e-commerce for merch, a taproom booking system, and a blog for beer culture content. I've got a logo and some brand colours but nothing else built yet. I want to set up an agent company for this project. I'm thinking maybe a design agent, a content agent, and a web dev agent but I'm not sure if that's right.",
+      "expected_output": "A complete agent-company/ folder with COMPANY.md and PERSONA.md files. Should challenge the 3-agent suggestion and address SEO/visibility.",
+      "files": [],
+      "expectations": [
+        "COMPANY.md exists and contains an ownership map table with columns for Concern, Owner, and Notes",
+        "COMPANY.md contains a conflict resolution table addressing boundary edges between agents",
+        "Each agent has a PERSONA.md containing all 7 sections: Identity, Voice, Analytical Frameworks, Source of Truth, Boundaries, Failure Modes, Standing Instructions",
+        "Each agent's Boundaries section includes Owns, Does not own, and Hands off to subsections",
+        "No two agents claim ownership of the same concern in the ownership map",
+        "Each agent has knowledge/ and mailbox/ directories created",
+        "The skill questions or challenges the user's initial 3-agent suggestion rather than blindly accepting it",
+        "An SEO or visibility concern is explicitly addressed — either as its own agent or assigned to a specific agent in the ownership map",
+        "The transcript shows evidence of running a quality gate checklist before presenting the design",
+        "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content (not placeholder text)",
+        "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
+        "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice like 'don't be vague')",
+        "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I run a small music production studio and I want agents to help me manage the business side — client outreach, social media, invoicing, and project management. I don't need anything technical or code-related, just the business operations. Set up an agent company for this.",
+      "expected_output": "A complete agent-company/ folder for a non-technical business operations team. No web/design/tech agents.",
+      "files": [],
+      "expectations": [
+        "COMPANY.md exists and contains an ownership map table with columns for Concern, Owner, and Notes",
+        "COMPANY.md contains a conflict resolution table addressing boundary edges between agents",
+        "Each agent has a PERSONA.md containing all 7 sections: Identity, Voice, Analytical Frameworks, Source of Truth, Boundaries, Failure Modes, Standing Instructions",
+        "Each agent's Boundaries section includes Owns, Does not own, and Hands off to subsections",
+        "No two agents claim ownership of the same concern in the ownership map",
+        "Each agent has knowledge/ and mailbox/ directories created",
+        "No web development, design, or technical coding agent is created — the user explicitly said non-technical",
+        "Agent analytical frameworks reference practical creative-industry or small-business methods, not generic corporate strategies",
+        "The transcript shows evidence of running a quality gate checklist before presenting the design",
+        "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content relevant to a music production studio",
+        "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
+        "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+        "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Here's my project brief: we're building a SaaS platform for independent restaurants to manage their online presence — menus, reviews, local SEO, social media scheduling. The codebase already exists with a Next.js frontend in src/app/, Tailwind config at tailwind.config.ts, and a Supabase backend. I need an agent company that covers product strategy, frontend design, content for the marketing site, and developer experience. Maybe 6 agents? I want them properly tested and ready to go.",
+      "expected_output": "A complete agent-company/ folder. Should reference real codebase paths and evaluate whether 6 agents is right.",
+      "files": [],
+      "expectations": [
+        "COMPANY.md exists and contains an ownership map table with columns for Concern, Owner, and Notes",
+        "COMPANY.md contains a conflict resolution table addressing boundary edges between agents",
+        "Each agent has a PERSONA.md containing all 7 sections: Identity, Voice, Analytical Frameworks, Source of Truth, Boundaries, Failure Modes, Standing Instructions",
+        "Each agent's Boundaries section includes Owns, Does not own, and Hands off to subsections",
+        "No two agents claim ownership of the same concern in the ownership map",
+        "Each agent has knowledge/ and mailbox/ directories created",
+        "At least one agent's Source of Truth table references actual codebase paths like src/app/, tailwind.config.ts, or supabase/",
+        "The skill evaluates whether 6 agents is the right number rather than blindly accepting the user's suggestion",
+        "The transcript shows evidence of running a quality gate checklist before presenting the design",
+        "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content",
+        "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
+        "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+        "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
+      ]
+    }
+  ]
+}
