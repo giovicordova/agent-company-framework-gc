@@ -54,6 +54,24 @@ If there is no editorial agent, apply these defaults:
 - **British English throughout.**
 - **Direct, practical voice.** Written for someone who needs to act on it, not admire it.
 
+### Action items as checkboxes (mandatory)
+
+Every actionable item in the brief **must** be a markdown checkbox (`- [ ]`). A brief with actionable items but no checkboxes is invalid — rewrite it before delivering. This lets the receiving agent mark items done as they work, and makes it trivial to find remaining work (`grep "- \[ \]" agent-company/*/mailbox/*`) and to detect when a brief is fully complete (no `- [ ]` left).
+
+Group checkboxes by priority or section. Each checkbox is one discrete, verifiable action — not a paragraph. Keep the explanation on the same line or immediately below, indented.
+
+```markdown
+## High priority
+- [ ] Remove pricing from hero section
+  Desktop bullet 1 → "First file free. No credit card needed."
+- [ ] Fix cost table: 8 hours should be $240 (8 × $30)
+
+## Medium priority
+- [ ] "RMS level" → "Loudness" in checklist
+```
+
+When a brief has no actionable items (pure context or decision request), checkboxes are not needed. But if the expected outcome involves the recipient changing anything, use checkboxes.
+
 ### Brief format
 
 ```markdown
@@ -67,14 +85,16 @@ Date: {YYYY-MM-DD}
 
 {Why this brief exists. 2-3 sentences max.}
 
-## {Sections as needed}
+## {Sections with checkbox items}
 
-{The substance. Structured for the recipient's domain.
-Self-contained: all context the recipient needs to act.}
+- [ ] {Action item}
+  {Supporting detail if needed.}
 
 ## Expected outcome
 
-{What the recipient should do or decide.}
+{What the recipient should do or decide. Reference the checkboxes above.}
+
+**When you check off the final item, move this file to `agent-company/{recipient}/mailbox/archive/{filename}`.** This is the last step of the brief — do not skip it. If the archive folder does not exist, create it.
 ```
 
 Use the clean agent name for From — `Marketing`, `Design`, `Editorial`, etc. No titles like "Specialist" or "Analyst". Match the names as they appear in COMPANY.md.
@@ -94,6 +114,8 @@ agent-company/{recipient}/mailbox/{topic}.md
 ```
 
 Filename: kebab-case, descriptive (e.g. `homepage-layout-brief.md`). If a file with the same name already exists, ask whether to replace or rename.
+
+Ensure `agent-company/{recipient}/mailbox/archive/` exists — create it if missing — so the recipient has somewhere to move the brief once every checkbox is ticked. The literal archive instruction is already embedded in the brief's **Expected outcome** section, so the recipient knows what to do; this step just guarantees the destination is ready.
 
 When sending to multiple recipients, the brief content stays the same — but the **Expected outcome** section is tailored per recipient. Each agent needs different actions, even when the context is identical.
 
