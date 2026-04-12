@@ -7,8 +7,6 @@ description: Design and build a complete team of specialised AI agents for any p
 
 Build a complete company of specialised AI agents for a project. One invocation takes you from "here's my project" to a fully tested `agent-company/` folder with COMPANY.md and one PERSONA.md per agent.
 
-Read the framework specification at `SYSTEM.md` in the project root before starting. It contains the folder structure, quality gates, and design principles that govern everything below.
-
 ## Overview
 
 The pipeline has three phases with one human checkpoint:
