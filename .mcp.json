@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "gsd-workflow": {
+      "command": "/usr/local/bin/node",
+      "args": [
+        "/usr/local/lib/node_modules/gsd-pi/packages/mcp-server/dist/cli.js"
+      ],
+      "cwd": "/Users/giovannicordova/Documents/02_projects/_P4_tooling/agent-company-framework-gc",
+      "env": {
+        "GSD_CLI_PATH": "/usr/local/bin/gsd",
+        "GSD_WORKFLOW_EXECUTORS_MODULE": "/Users/giovannicordova/.gsd/agent/extensions/gsd/tools/workflow-tool-executors.js",
+        "GSD_WORKFLOW_WRITE_GATE_MODULE": "/Users/giovannicordova/.gsd/agent/extensions/gsd/bootstrap/write-gate.js",
+        "GSD_PERSIST_WRITE_GATE_STATE": "1",
+        "GSD_WORKFLOW_PROJECT_ROOT": "/Users/giovannicordova/Documents/02_projects/_P4_tooling/agent-company-framework-gc"
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "skill_name": "board-meeting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Board meeting — I'm thinking about launching a paid newsletter for audio engineers who want to learn AI tools. Should I go for it? What's the play here?",
+      "expected_output": "A full board meeting with all 3 agents (Strategist, Editor, Recruiter) speaking sequentially, each engaging with prior speakers, surfacing a domain-specific risk, and ending with a position. Followed by a Board Recommendation and 'Approve, amend, or reject?' prompt. Word limits respected.",
+      "files": [],
+      "expectations": [
+        "Output contains headers for all 3 agents: Strategist, Editor, Recruiter",
+        "Each agent turn is 60 words or fewer",
+        "Total discussion before Board Recommendation is 400 words or fewer",
+        "Board Recommendation section exists and is 80 words or fewer",
+        "Each agent surfaces at least one realistic risk or counterpoint",
+        "Agents reference prior speakers — not isolated monologues",
+        "Ends with 'Approve, amend, or reject?' or equivalent",
+        "Strategist references 3-axis check or market/revenue concepts",
+        "Editor references Scan Test or clarity concerns",
+        "Recruiter references calibration protocol or people/team concerns"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Convene the board — should we pivot from B2B to B2C for our SaaS product?",
+      "expected_output": "Board meeting where agents disagree on the pivot (Strategist likely sees market risk, Editor sees messaging complexity, Recruiter sees talent gaps). Disagreement should be surfaced explicitly and resolved per COMPANY.md rules. Each agent includes adversarial counterpoint.",
+      "files": [],
+      "expectations": [
+        "Output contains headers for all 3 agents",
+        "At least one explicit disagreement is surfaced between agents",
+        "Disagreement resolution follows COMPANY.md rules (domain owner priority or Gio decides)",
+        "Each agent turn is 60 words or fewer",
+        "Board Recommendation section exists",
+        "Each agent includes a realistic risk or counterpoint",
+        "Agents engage with each other, not isolated monologues",
+        "Ends with approval prompt"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Ask the agents about the thing we discussed",
+      "expected_output": "Skill recognises this is ambiguous and asks ONE clarifying question before proceeding. Does not run a full meeting on a vague prompt.",
+      "files": [],
+      "expectations": [
+        "Does NOT run a full board meeting immediately",
+        "Asks exactly one clarifying question",
+        "Does not ask multiple questions or run an interview"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Board meeting — we need to hire a part-time content writer. What should we look for and how should we position the role?",
+      "expected_output": "Full board meeting. After the meeting concludes and approval happens, the skill should ask whether to keep in chat or save as a document. If saved, file goes to docs/board-meetings/ with correct naming convention and summary-first structure.",
+      "files": [],
+      "expectations": [
+        "Output contains headers for all 3 agents",
+        "Recruiter speaks first or early (domain owner for hiring)",
+        "Each agent turn is 60 words or fewer",
+        "Board Recommendation section exists and is 80 words or fewer",
+        "Each agent surfaces a realistic risk or counterpoint",
+        "Meeting ends with approval prompt",
+        "After approval, asks whether to save or keep in chat (AskUserQuestion or equivalent)"
+      ]
+    }
+  ]
+}
