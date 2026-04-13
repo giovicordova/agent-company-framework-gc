@@ -44,7 +44,7 @@ Each agent speaks in turn, in its own voice, with a clear header:
 
 Each turn must:
 - Engage with what previous speakers said — agree, build, push back, or flag a conflict. A board meeting is not a stack of monologues.
-- Apply that agent's **actual** expertise from its PERSONA.md. If the topic is outside their domain, they should say so briefly and defer rather than invent an opinion.
+- Apply that agent's **actual** expertise — meaning the frameworks, analytical approaches, and domain knowledge defined in its PERSONA.md, not factual claims from training data. If an agent needs to state a fact it can't verify from its PERSONA.md or knowledge folder, it should flag "I'd need to verify this" rather than stating it confidently. If the topic is outside their domain, they should say so briefly and defer rather than invent an opinion.
 - **Surface one realistic risk or counterpoint** from their domain. Not extreme, not hypothetical — something that could actually go wrong or that the group might be overlooking. This is not a separate step; weave it into the turn naturally. If the agent genuinely sees no risk, they say so and move on — don't invent problems.
 - End with that agent's concrete position: recommend / object / abstain, plus the reason in one or two sentences.
 
@@ -57,7 +57,7 @@ Keep each turn tight — a few sentences to a short paragraph. Density over leng
 Gio reads these meetings on a phone between tasks. Long transcripts kill the skill. Enforce:
 
 - **Each agent turn: ≤ 60 words.** This is roughly 3–4 sentences. Here is what 60 words looks like — this exact paragraph is 60 words: "Running the 3-axis check. Market is narrow but defensible — few people sit at this intersection authentically. Execution is feasible given Gio's crossover. But niche markets cap revenue fast, so this only works as a premium play, not volume. Recommend — price high, start small, validate before scaling."
-- **Whole meeting: ≤ 400 words total** before the Board Recommendation, regardless of roster size. If the roster is large, turns get shorter — not the meeting longer.
+- **Whole meeting: ≤ 400 words total** before the Board Recommendation, regardless of roster size. This includes any extra turns from disagreement resolution. If the roster is large or disagreements arise, turns get shorter — not the meeting longer.
 - **Board Recommendation: ≤ 80 words.** Must fit on one phone screen.
 - **No preamble, no recap, no "great points everyone".** Start at the first agent's header. End at "Approve, amend, or reject?".
 - **No bullet lists inside agent turns** unless the agent is literally enumerating options. Prose is tighter.

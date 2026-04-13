@@ -19,6 +19,8 @@
         "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content (not placeholder text)",
         "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
         "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice like 'don't be vague')",
+        "Each PERSONA.md Standing Instructions includes an instruction about verifying claims against current sources before giving opinions, with URL citation",
+        "Each PERSONA.md Failure Modes includes a failure mode about relying on training data instead of researching current sources",
         "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
       ]
     },
@@ -40,6 +42,8 @@
         "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content relevant to a music production studio",
         "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
         "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+        "Each PERSONA.md Standing Instructions includes an instruction about verifying claims against current sources before giving opinions, with URL citation",
+        "Each PERSONA.md Failure Modes includes a failure mode about relying on training data instead of researching current sources",
         "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
       ]
     },
@@ -61,6 +65,8 @@
         "Each PERSONA.md Voice section includes at least 2 example sentences with specific, realistic content",
         "Each PERSONA.md Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
         "Each PERSONA.md Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+        "Each PERSONA.md Standing Instructions includes an instruction about verifying claims against current sources before giving opinions, with URL citation",
+        "Each PERSONA.md Failure Modes includes a failure mode about relying on training data instead of researching current sources",
         "The ownership map in COMPANY.md is consistent with the Owns sections in each PERSONA.md — no discrepancies"
       ]
     }

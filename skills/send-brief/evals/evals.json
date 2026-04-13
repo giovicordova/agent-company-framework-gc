@@ -1,0 +1,67 @@
+{
+  "skill_name": "send-brief",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Send a brief to the Editor about the homepage copy. We decided to remove pricing from the hero section, replace the first bullet with 'First file free. No credit card needed.', and fix the cost table because 8 hours should be $240 not $280. I'm the Strategist.",
+      "expected_output": "A polished brief from Strategist to Editor with clear context, checkbox action items, and self-contained content the Editor can act on cold.",
+      "files": [],
+      "expectations": [
+        "Brief has From field showing Strategist (not 'Specialist' or 'Analyst')",
+        "Brief has a Context section explaining why these changes are needed",
+        "All actionable items are markdown checkboxes (- [ ])",
+        "At least 3 checkbox items corresponding to the 3 changes described",
+        "Brief includes an Expected Outcome section",
+        "Expected Outcome references the checkboxes",
+        "Brief includes the archive instruction: move to mailbox/archive/ when complete",
+        "Brief is self-contained — a reader without this conversation context can understand what to do",
+        "Brief is saved to agent-company/editorial/mailbox/ or equivalent Editor mailbox path",
+        "User is shown the brief for review before saving"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Brief the Design and Marketing agents about the new brand refresh. We're changing the primary colour from blue to teal, updating the logo, and launching a social media campaign to announce it. Send from Editorial.",
+      "expected_output": "Two briefs delivered — same core content but with tailored Expected Outcome sections for each recipient. Design gets the colour and logo work, Marketing gets the campaign work.",
+      "files": [],
+      "expectations": [
+        "Two separate brief files are created — one for Design, one for Marketing",
+        "Both briefs share the same Context section",
+        "Design's Expected Outcome focuses on colour change and logo update — not the campaign",
+        "Marketing's Expected Outcome focuses on the social media campaign — not the design changes",
+        "All actionable items are markdown checkboxes (- [ ])",
+        "Each brief includes the archive instruction",
+        "From field shows Editorial in both briefs",
+        "Recipient's PERSONA.md was read before writing (evidence: domain-appropriate language or framework references)",
+        "User is shown briefs for review before saving"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Send a brief to the Recruiter.",
+      "expected_output": "Skill recognises there is not enough context and asks what the brief should cover before writing anything.",
+      "files": [],
+      "expectations": [
+        "Does NOT generate a brief immediately",
+        "Asks what the brief should cover or what context to include",
+        "Does not fabricate content from nothing"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Brief the Strategist about our competitor analysis findings. We looked at three competitors: AudioMix Pro charges $49/mo and has 2000 users, SoundLab is free with premium at $29/mo and has 8000 users, and MasterDesk just launched at $39/mo with no public user numbers yet. The key insight is that free tiers drive adoption but the conversion rate to paid is only about 12% industry-wide. I'm the Editor sending this.",
+      "expected_output": "A data-rich brief with all competitor details preserved accurately, structured for a strategist to act on. No facts lost or rounded.",
+      "files": [],
+      "expectations": [
+        "All three competitor names appear with correct pricing",
+        "User counts are preserved exactly (2000, 8000)",
+        "The 12% conversion rate is included",
+        "From field shows Editor",
+        "Brief is structured with clear sections — not a wall of text",
+        "All actionable items (if any) are markdown checkboxes",
+        "Brief is under 300 words or close to it",
+        "Brief includes Expected Outcome telling the Strategist what to do with this information"
+      ]
+    }
+  ]
+}

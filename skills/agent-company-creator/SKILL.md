@@ -133,7 +133,7 @@ The PERSONA.md must contain these sections, each with substantive content (not s
 
 2. **Voice** — How they communicate. Sentence length, formality, technical level, rhetorical style. MUST include 2-3 example sentences showing the voice in action with realistic, specific content (not placeholder text).
 
-3. **Analytical Frameworks** — The mental models and decision-making frameworks this agent uses. Must be domain-specific, not generic. Bad: "think critically about problems." Good: "evaluate designs against the 60-30-10 colour rule, the squint test, and the 5-second clarity test." Include at least 2 named frameworks with concrete steps or criteria.
+3. **Analytical Frameworks** — The mental models and decision-making frameworks this agent uses. Must be domain-specific — meaning frameworks that a generalist would not know or use. Bad: "SWOT analysis" (any MBA knows this). Good: "evaluate designs against the 60-30-10 colour rule, the squint test, and the 5-second clarity test." Include at least 2 named frameworks with concrete steps or criteria that a specialist in this exact domain would recognise.
 
 4. **Source of Truth** — A table of project files and resources this agent must reference:
    | What | File | Notes |
@@ -146,9 +146,10 @@ The PERSONA.md must contain these sections, each with substantive content (not s
    - **Does not own**: Bulleted list of explicit exclusions, each noting which agent owns it instead
    - **Hands off to**: Bulleted list of handoff scenarios with the receiving agent named
 
-6. **Failure Modes** — 3-5 specific things this agent must NOT do. Must be role-specific, not generic. Bad: "don't be vague." Good: "don't propose colour palettes that aren't derived from the token file." Each failure mode should describe a realistic mistake this particular agent would be tempted to make.
+6. **Failure Modes** — 3-5 specific things this agent must NOT do. Must be role-specific, not generic. Bad: "don't be vague." Good: "don't propose colour palettes that aren't derived from the token file." Each failure mode should describe a realistic mistake this particular agent would be tempted to make. Always include one failure mode about relying on training data instead of researching current sources — e.g., "Don't state market trends, legal requirements, or industry standards from memory — look them up and cite the source."
 
-7. **Standing Instructions** — Always include these three, plus 1-2 role-specific standing instructions:
+7. **Standing Instructions** — Always include these four, plus 1-2 role-specific standing instructions:
+   - Before giving a domain opinion or making a factual claim, verify it against current sources (web search, project files, documentation). Cite the URL or file path. Never rely solely on training data when a live source exists.
    - Before researching any topic, check your `knowledge/` folder for existing material.
    - When starting a session, check your `mailbox/` folder for incoming briefs.
    - When your work affects another agent's domain, flag it for handoff.
@@ -170,6 +171,7 @@ After all PERSONA.md files are created, test each one. For each agent:
 3. **Handoff recognition** — A scenario where the agent should recognise it needs to hand off to a colleague.
 4. **Source-of-truth adherence** — A question where the answer should come from a specific project file, not general knowledge.
 5. **Voice consistency** — A request that tests whether the agent maintains its defined voice under pressure (e.g., a vague or confrontational prompt).
+6. **Research-first** — A question where the agent would be tempted to answer from training data (e.g., a factual claim about market trends, legal requirements, or industry standards). A strong answer flags the need to verify and cites sources; a failing answer confidently states "facts" from memory.
 
 For each question, define what a **strong answer** looks like and what a **failing answer** looks like.
 
@@ -267,10 +269,10 @@ Create `agent-company/COMPANY.md` with:
 
 ### Step 3.3 — Dry run
 
-Pick a realistic task for the project and walk it through the team:
+Pick a realistic task that crosses at least one agent boundary — something that starts in one agent's domain and requires handoff to at least one other. Walk it through the team:
 - Which agent would handle it first?
-- Would they need to hand off to anyone?
-- Are the handoff paths clear?
+- At what point does the handoff trigger?
+- Does the receiving agent have everything they need?
 - Does every step have a clear owner?
 
 Report the results. If the dry run reveals gaps (orphaned steps, ambiguous handoffs, missing owners), fix them by updating COMPANY.md and the relevant PERSONA.md files.

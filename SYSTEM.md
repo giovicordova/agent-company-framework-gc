@@ -93,7 +93,7 @@ Each agent is a domain expert with a single file that defines everything about t
 - **Identity and voice** — Who they are. Their perspective, analytical frameworks, decision-making style, and explicit failure modes to avoid.
 - **Source of Truth** — Links directly to actual project files, config, and code that define the constraints. A design agent's source of truth points to the real design tokens file, the actual Tailwind config, the live component library — not copies. This keeps specs always in sync with the project.
 - **Boundaries** — What they own, what they don't, and who they hand off to.
-- **Standing instructions** — Check `knowledge/` before web searching. Check `mailbox/` when starting a session.
+- **Standing instructions** — Verify claims against current sources before giving opinions. Check `knowledge/` before web searching. Check `mailbox/` when starting a session. Flag cross-domain work for handoff.
 
 Source of Truth format (inside PERSONA.md):
 
@@ -158,12 +158,13 @@ Each agent's `knowledge/` folder is empty at creation. Agents research on-demand
 
 **Rules:**
 
-1. **Check before searching** — Before researching any topic, the agent checks `knowledge/` for existing material. Baked into every PERSONA.md as a standing instruction.
-2. **Modular** — One file per topic. No mega-documents. Smaller, focused documents organised logically.
-3. **Sourced** — Every factual claim has a URL. No unsourced assertions.
-4. **Current** — Documents include the date they were last verified.
-5. **Deduplicated** — When new research comes in, the agent automatically consolidates the knowledge folder: merges overlapping content, removes duplications, updates outdated claims, and restructures files to maintain the best possible organisation by topic. The folder is always clean and current.
-6. **Coherent** — No contradictions within an agent's knowledge base or between agents.
+1. **Research before answering** — Before giving a domain opinion or factual claim, the agent verifies it against current sources (web search, project files, documentation) and cites the URL or file path. This is baked into every PERSONA.md as a standing instruction.
+2. **Check before searching** — Before researching any topic, the agent checks `knowledge/` for existing material. Baked into every PERSONA.md as a standing instruction.
+3. **Modular** — One file per topic. No mega-documents. Smaller, focused documents organised logically.
+4. **Sourced** — Every factual claim has a URL. No unsourced assertions.
+5. **Current** — Documents include the date they were last verified.
+6. **Deduplicated** — When new research comes in, the agent automatically consolidates the knowledge folder: merges overlapping content, removes duplications, updates outdated claims, and restructures files to maintain the best possible organisation by topic. The folder is always clean and current.
+7. **Coherent** — No contradictions within an agent's knowledge base or between agents.
 
 Knowledge document format:
 
@@ -231,7 +232,7 @@ Each agent persona is tested using the skill-creator evaluation pattern:
 
 1. **Separation of concerns** — Each agent owns one domain. No overlap.
 2. **Explicit boundaries** — What an agent does NOT do is as important as what it does.
-3. **Verifiable knowledge** — No claims without sources. No "I think" — only "according to {source}."
+3. **Research-first** — Before giving a domain opinion or making a factual claim, verify it against current sources. Cite URLs or file paths. Never rely on training data when a live source exists. No "I think" — only "according to {source}."
 4. **Structured communication** — Agents talk through briefs with clear requests and deliverables. Within sessions via SendMessage, across sessions via mailbox.
 5. **Iterative quality** — Every persona is tested and refined, not shipped on first draft. Every company design is stress-tested before creation begins.
 6. **Reusable across projects** — The framework works for any domain. The agents change; the structure doesn't.

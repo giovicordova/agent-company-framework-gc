@@ -38,6 +38,8 @@ If the company has an editorial agent, that agent edits the brief but is not the
 
 ## Step 3 — Gather content
 
+Read each recipient's PERSONA.md to understand their domain, boundaries, and terminology. This ensures the brief speaks in terms the recipient recognises and assigns only work within their ownership.
+
 Synthesise from the current conversation. The brief must be **self-contained**: the receiving agent reads it cold, without access to this conversation. Include all context, decisions, rationale, and constraints they need.
 
 If the conversation doesn't contain enough context for a complete brief, ask: "What should this brief cover?"
@@ -98,6 +100,10 @@ Date: {YYYY-MM-DD}
 ```
 
 Use the clean agent name for From — `Marketing`, `Design`, `Editorial`, etc. No titles like "Specialist" or "Analyst". Match the names as they appear in COMPANY.md.
+
+### Length discipline
+
+Keep briefs under 300 words. If the content genuinely requires more, it's fine — but most briefs are tighter than people think. A brief that takes longer to read than to act on is too long. Front-load the most important information so the recipient can skim and act.
 
 Adapt the section structure to fit the content. The template is a guide, not a cage. Some briefs need tables, some need lists, some need a single narrative section. Match the structure to the message.
 
