@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "skill_name": "agent-company-creator",
+    "skill_path": "/Users/giovannicordova/Documents/02_projects/_P4_tooling/agent-company-framework-gc/skills/agent-company-creator",
+    "executor_model": "claude-opus-4-6",
+    "timestamp": "2026-04-14T15:00:00Z",
+    "iteration": 2,
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1,
+    "baseline_reference": "iteration-1 without_skill (held constant, not re-run)"
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "brewery-greenfield-v3",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 25,
+        "failed": 0,
+        "total": 25,
+        "time_seconds": 518.8,
+        "tokens": 63830,
+        "errors": 0
+      },
+      "notes": [
+        "Single session, no handoff.",
+        "Routing sanity check caught a real collision (content-lead vs taproom-ops on cancellation-policy prose) and fixed it with a one-pass description edit; re-run clean.",
+        "Calibration at content level (Agent tool unavailable to the executor subagent). Disclosed in activation-summary."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "music-studio-non-technical-v3",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 25,
+        "failed": 0,
+        "total": 25,
+        "time_seconds": 393.5,
+        "tokens": 56051,
+        "errors": 0
+      },
+      "notes": [
+        "Non-technical scope respected — no web/design/code agents.",
+        "Routing check: 12 prompts x 2 runs, clean. Two boundary cases resolved via explicit handoff triggers.",
+        "Calibration at content level (Agent tool unavailable)."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "saas-restaurant-existing-codebase-v3",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9583,
+        "passed": 23,
+        "failed": 1,
+        "total": 24,
+        "time_seconds": 867.4,
+        "tokens": 87688,
+        "errors": 0
+      },
+      "notes": [
+        "Initial run — 6 agents, defended explicitly against user's 6-agent suggestion.",
+        "Codebase grounding: src/app/, tailwind.config.ts, supabase/migrations/ referenced in bodies.",
+        "Routing check caught dx-engineer vs frontend-designer 'console errors' ambiguity; fixed via description edits.",
+        "Single failure: COMPANY.md Conflict Resolution rendered as numbered list instead of markdown table. SKILL.md patched; re-run in run_number 2."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "saas-restaurant-existing-codebase-v3",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 24,
+        "failed": 0,
+        "total": 24,
+        "time_seconds": 423.4,
+        "tokens": 60860,
+        "errors": 0
+      },
+      "notes": [
+        "Post-patch re-run. SKILL.md Step 6 now specifies Conflict Resolution as markdown table with columns Boundary | Agent A | Agent B | Resolution.",
+        "Output: 12-row conflict resolution table covering real boundary edges (microcopy, schema.org, GDPR, Tailwind tokens, etc).",
+        "6 agents again, with slightly different composition (product-lead, frontend-designer, marketing-writer, dx-engineer, local-seo-specialist, supabase-architect). Sizing defence more concrete than first run.",
+        "Also faster (423s vs 867s) and cheaper (61K vs 88K tokens) — possibly due to tighter guidance from the patched skill."
+      ]
+    }
+  ],
+  "iteration_1_reference": {
+    "with_skill": {"pass_rate_mean": 0.983, "passed": 59, "total": 60, "time_seconds_mean": 540, "notes": "Multi-session pipeline."},
+    "without_skill": {"pass_rate_mean": 0.15, "passed": 9, "total": 60, "time_seconds_mean": 204, "notes": "Baseline, not re-run in iteration 2."}
+  }
+}

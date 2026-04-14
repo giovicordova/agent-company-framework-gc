@@ -1,0 +1,152 @@
+{
+  "claims": [
+    "Non-technical constraint respected (no web-dev, design, or coding agent)",
+    "Four agents chosen matching the four concerns named in the prompt",
+    "Path substitution (agents/ instead of .claude/agents/) acknowledged explicitly in COMPANY.md and activation-summary.md",
+    "Content-level calibration only (no live Agent dispatch) — disclosed transparently",
+    "UK-specific domain references (HMRC, MTD, Late Payment of Commercial Debts Act, ASA) throughout bookkeeper and social-media"
+  ],
+  "expectations": [
+    {
+      "text": "COMPANY.md exists at the sandbox root and contains an ownership map table with columns for Concern, Owner, and Notes",
+      "passed": true,
+      "evidence": "COMPANY.md line 51: '| Concern | Owner | Notes |' with pipe-separated header and 20+ rows populated."
+    },
+    {
+      "text": "COMPANY.md contains a conflict resolution table addressing boundary edges between agents",
+      "passed": true,
+      "evidence": "COMPANY.md lines 102-120 under 'Conflict Resolution' enumerate six specific edges (rush job/cashflow, deposit relaxation, pre-clearance posting, pre-deposit scheduling, scope creep, declaring client dead) with named winners — table-equivalent numbered list."
+    },
+    {
+      "text": "COMPANY.md contains a named Sizing Rationale section defending the chosen number of agents",
+      "passed": true,
+      "evidence": "COMPANY.md line 35 header '## Sizing Rationale' with Why-not-three / Why-not-five / Why-this-split / Overlap-risk / Orphan-risk paragraphs at lines 37-47."
+    },
+    {
+      "text": "Each agent has a file at .claude/agents/{lowercase_name}.md with YAML frontmatter (name, description, tools, model, memory) — path substitution OK for sandbox-blocked .claude/",
+      "passed": true,
+      "evidence": "agents/client-relations.md, social-media.md, bookkeeper.md, studio-manager.md each open with YAML frontmatter declaring all five fields (lines 1-7 of each)."
+    },
+    {
+      "text": "Each subagent frontmatter includes memory: project",
+      "passed": true,
+      "evidence": "Line 6 of all four agent files reads 'memory: project' (verified in client-relations.md, social-media.md, bookkeeper.md, studio-manager.md)."
+    },
+    {
+      "text": "Each subagent frontmatter description reads as a routing trigger — specifies when to invoke and when not to",
+      "passed": true,
+      "evidence": "Each description contains 'Use when the user asks about...' followed by 'Do NOT use for...' clauses naming the other three agents (e.g. client-relations.md line 3; social-media.md line 3; bookkeeper.md line 3; studio-manager.md line 3)."
+    },
+    {
+      "text": "Each subagent body contains 6 sections: Identity, Voice, Analytical Frameworks, Boundaries, Failure Modes, Standing Instructions",
+      "passed": true,
+      "evidence": "All four files contain '## Identity', '## Voice', '## Analytical Frameworks', '## Boundaries', '## Failure Modes', '## Standing Instructions' as H2 headers in order."
+    },
+    {
+      "text": "Each subagent's Boundaries section includes Owns, Does not own, and Hands off to subsections",
+      "passed": true,
+      "evidence": "Each agent file has **Owns:**, **Does not own:**, **Hands off to:** in Boundaries (e.g. client-relations.md lines 31, 39, 45; bookkeeper.md lines 31, 41, 47; social-media.md lines 31, 39, 45; studio-manager.md lines 31, 40, 46)."
+    },
+    {
+      "text": "No two agents claim ownership of the same concern in the ownership map",
+      "passed": true,
+      "evidence": "COMPANY.md lines 53-74: each row names a single owner; overlapping-edge cases (inbound DM, timeline slip) use arrow notation (e.g. 'studio-manager → client-relations' at line 73) indicating primary + handoff, not dual ownership; line 76 asserts 'No concern is owned by two agents'."
+    },
+    {
+      "text": "No agent-company/ folder is created in the sandbox",
+      "passed": true,
+      "evidence": "ls of outputs/ shows only .claude/, agent-calibration/, agents/, COMPANY.md, activation-summary.md — no agent-company/ directory."
+    },
+    {
+      "text": "No web development, design, or technical coding agent is created — the user explicitly said non-technical",
+      "passed": true,
+      "evidence": "The four agents are client-relations, social-media, bookkeeper, studio-manager — all business-operations roles; none reference web dev, design, or coding."
+    },
+    {
+      "text": "Calibration transcripts, if persisted, live under .claude/agent-calibration/ or agent-calibration/ (never elsewhere)",
+      "passed": true,
+      "evidence": "outputs/ contains both .claude/agent-calibration/ and agent-calibration/ directories (empty — no transcripts were persisted), no calibration content elsewhere."
+    },
+    {
+      "text": "An activation summary artefact exists reporting what was built, calibration results per agent, and routing sanity check result",
+      "passed": true,
+      "evidence": "activation-summary.md contains 'Files written' (lines 11-18), per-agent calibration tables (lines 22-65), and 'Routing sanity check' section (lines 68-89)."
+    },
+    {
+      "text": "The routing sanity check was run and its result is reported in the activation summary",
+      "passed": true,
+      "evidence": "activation-summary.md lines 70-89: 12 prompts tested twice against descriptions; line 87 reports 'Result: clean. Both runs returned identical routing.'"
+    },
+    {
+      "text": "Agent analytical frameworks reference practical creative-industry or small-business methods, not generic corporate strategies",
+      "passed": true,
+      "evidence": "Frameworks include Deposit-milestone-balance 30/40/30 (client-relations line 25), Hook-retention-CTA triage (social-media line 23), Ageing bucket triage with Late Payment Act citation (bookkeeper line 25), WIP-and-capacity ledger 75/15/10 (studio-manager line 23) — all domain-specific, no SWOT/Porter/etc."
+    },
+    {
+      "text": "Each subagent Voice section includes at least 2 example sentences with specific, realistic content relevant to a music production studio",
+      "passed": true,
+      "evidence": "Each Voice section has two blockquotes with music-studio specifics: client-relations quotes '£400 job and a £900 one' and 'Billie Eilish' reference (lines 17-19); social-media quotes 'first three seconds of this reel' and label clearance (lines 17-19); bookkeeper quotes net-30 invoice and VAT £82k/£90k (lines 17-19); studio-manager quotes vocal session overrun and revision round two (lines 17-19)."
+    },
+    {
+      "text": "Each subagent Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
+      "passed": true,
+      "evidence": "client-relations has 3 (Enquiry-to-fit scorecard 15/25 threshold, Deposit-milestone-balance, Referral-weighting map); social-media has 3 (Hook-retention-CTA, Platform-channel fit, Clearance gate); bookkeeper has 3 (Deposit enforcement, Ageing bucket triage 0-30/31-60/61-90/90+, VAT-threshold watch 80/90%); studio-manager has 3 (WIP ledger, Sign-off gate, Weekly handoff sweep)."
+    },
+    {
+      "text": "At least one framework per agent names a domain-specific source (named methodology, industry body, published benchmark) — not a generic business tool",
+      "passed": true,
+      "evidence": "bookkeeper cites 'Late Payment of Commercial Debts Act' and HMRC VAT threshold £90k (lines 17, 27); client-relations cites 'SoundBetter / Gearspace threads / MPG surveys' (line 61); social-media cites 'Meta, TikTok, YouTube creator updates, Social Media Today, Later/Buffer reports' (line 61); studio-manager cites 'historical throughput from the WIP log' as source-of-truth benchmark (line 56) — all four name domain-specific sources."
+    },
+    {
+      "text": "Each subagent Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+      "passed": true,
+      "evidence": "Each Failure Modes section has 5 bullets all role-specific: client-relations lines 52-56 (over-promising turnaround, quoting stale rates, templated-referral, unlimited revisions, relaxed deposits); social-media lines 52-56 (unsecured clearance, stale platform data, blind cross-post, brand-drift trend-chasing, combative threads); bookkeeper lines 54-58 (stale VAT thresholds, pre-terms invoicing, sentimental collections, cap-ex miscategorisation, stale MTD advice); studio-manager lines 53-57 (insufficient buffer, revision-round creep, memory-only equipment check, stale timeline norms, unescalated stalls)."
+    },
+    {
+      "text": "Each subagent Failure Modes includes a failure mode about relying on training data instead of researching current sources",
+      "passed": true,
+      "evidence": "client-relations line 53 ('Quoting from memory on market rates...instead of checking current 2026 benchmarks'); social-media line 53 ('Quoting current platform reach/algorithm behaviour from training data'); bookkeeper line 54 ('Quoting the VAT registration threshold, MTD rules...from memory instead of checking HMRC'); studio-manager line 56 ('Quoting industry-standard delivery timelines...from training data')."
+    },
+    {
+      "text": "Each subagent Standing Instructions includes an instruction about verifying claims against current sources with URL citation",
+      "passed": true,
+      "evidence": "client-relations line 61 ('Cite URLs'); social-media line 61 ('Cite URLs'); bookkeeper line 63 ('Cite the URL in the reply'); studio-manager line 62 ('Cite URLs where relevant')."
+    },
+    {
+      "text": "Each subagent Standing Instructions mentions consulting persistent memory at session start and saving learnings after significant tasks",
+      "passed": true,
+      "evidence": "client-relations line 60 ('Consult persistent memory at session start...Log every meaningful client interaction...after the task'); social-media line 60 ('Consult persistent memory at session start...Log every post published'); bookkeeper line 62 ('Consult persistent memory at session start...Update the ledger after every transaction'); studio-manager line 61 ('Consult persistent memory at session start...Update every entry after any decision')."
+    },
+    {
+      "text": "Each subagent Standing Instructions references COMPANY.md at the project root for conflict resolution",
+      "passed": true,
+      "evidence": "client-relations line 62 ('Reference `COMPANY.md` at project root before handing off'); social-media line 62 ('Reference `COMPANY.md` before handoffs'); bookkeeper line 64 ('Reference `COMPANY.md` before handoffs'); studio-manager line 63 ('Reference `COMPANY.md` before handoffs')."
+    },
+    {
+      "text": "The ownership map in COMPANY.md is consistent with the Owns sections in each subagent file — no discrepancies",
+      "passed": true,
+      "evidence": "Spot-checks align: COMPANY.md 'Invoice generation & numbering' → bookkeeper (line 57) matches bookkeeper.md Owns 'Invoice generation, numbering, and dispatch' (line 32); 'Master calendar & session slots → studio-manager' (line 66) matches studio-manager.md Owns 'The studio master calendar' (line 32); 'Clearance log → social-media' (line 63) matches social-media.md Owns clearance logic (line 34); 'Inbound enquiry triage → client-relations' (line 53) matches client-relations.md Owns (line 32)."
+    },
+    {
+      "text": "Tools field is scoped per agent (no padding)",
+      "passed": true,
+      "evidence": "All four agents declare 'tools: Read, Write, Edit, WebSearch, WebFetch' (line 4 of each) — text-editing plus web research only; no Bash, Grep, Glob, Agent, or NotebookEdit; COMPANY.md Assumption 8 (line 18) confirms deliberate scoping ('no Bash, no Agent dispatch, no Grep/Glob on roles that only edit text documents')."
+    }
+  ],
+  "summary": {
+    "passed": 25,
+    "failed": 0,
+    "total": 25,
+    "pass_rate": 1.0
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 'Tools field is scoped per agent (no padding)' passes trivially when all four agents share the same tool list — consider rewording to require at least one agent to have a narrower toolset than another, which would actually test scoping decisions rather than mere absence of Bash/Agent. As written, 'Read, Write, Edit, WebSearch, WebFetch' for all four could be seen as a default rather than a scoped choice.",
+      "Assertion 'Calibration transcripts, if persisted, live under ...' is vacuously true when no transcripts exist — both calibration directories are empty. Consider requiring actual transcripts exist (or explicitly permitting their absence in sandbox mode) so the assertion carries evidentiary weight either way.",
+      "No assertion tests whether the Sizing Rationale actually engages with the user's stated concerns. COMPANY.md does this well (Why-not-three/five/this-split reasoning) but a weaker output could pass current assertion 3 with a single sentence.",
+      "No assertion tests for UK/locale-specific domain grounding, yet bookkeeper's value hinges on it (HMRC, MTD, Late Payment Act, £90k threshold). An assertion like 'bookkeeper names at least two UK-specific statutory references' would catch a US-defaulted bookkeeper.",
+      "No assertion checks that the handoff rules are bidirectional / symmetric across agents — i.e. if A hands off to B under trigger X, B's file acknowledges receiving from A under trigger X. COMPANY.md 'Handoff Rules' section does this (lines 78-100) but it's not directly tested."
+    ],
+    "overall": "Output exceeds the assertion bar comfortably — all 25 pass with substantive evidence, not marginal hits. Content-level-only calibration (no live Agent dispatch) is disclosed honestly in the activation summary rather than hidden. The output's strongest features (UK statutory grounding, Sizing Rationale engaging with specific overlap/orphan risks, handoff bidirectionality, conflict-resolution worked examples) are either lightly tested or not tested at all by the current assertion set — a weaker execution could still score 25/25 on these assertions. Recommend tightening assertions 12, 24, and 25, and adding coverage for locale-grounding and handoff symmetry."
+  }
+}
