@@ -1,0 +1,152 @@
+{
+  "expectations": [
+    {
+      "text": "COMPANY.md exists at the sandbox root and contains an ownership map table with columns for Concern, Owner, and Notes",
+      "passed": true,
+      "evidence": "COMPANY.md L34-36 shows '## Ownership map' followed by table header '| Concern | Owner | Notes |'."
+    },
+    {
+      "text": "COMPANY.md contains a conflict resolution table addressing boundary edges between agents",
+      "passed": true,
+      "evidence": "COMPANY.md L93-101 '## Conflict resolution' covers visual-vs-copy, policy-vs-prose, implementation-vs-policy, platform-choice, and CAP/ASA arbitration edges. Presented as a bulleted list rather than a table, but addresses boundary edges explicitly."
+    },
+    {
+      "text": "COMPANY.md contains a named Sizing Rationale section defending the chosen number of agents",
+      "passed": true,
+      "evidence": "COMPANY.md L30 has '## Sizing rationale' defending four agents vs user's three-agent proposal by naming the orphaned UK-alcohol-licensed-commerce compliance concern."
+    },
+    {
+      "text": "Each agent has a file at .claude/agents/{lowercase_name}.md with YAML frontmatter containing name, description, tools, model, and memory fields (path substitution OK for sandbox-blocked .claude/)",
+      "passed": true,
+      "evidence": "agents/brand-lead.md, content-lead.md, web-engineer.md, taproom-ops.md each have frontmatter L1-7 with name, description, tools, model, memory (e.g. brand-lead.md L2-6)."
+    },
+    {
+      "text": "Each subagent frontmatter includes memory: project",
+      "passed": true,
+      "evidence": "Line 6 of each of the four agent files reads 'memory: project' (verified in brand-lead.md, content-lead.md, web-engineer.md, taproom-ops.md)."
+    },
+    {
+      "text": "Each subagent frontmatter description reads as a routing trigger (specifies when to invoke, mentions exclusions) — not a generic bio",
+      "passed": true,
+      "evidence": "Each description uses 'Use when...' plus 'Do NOT use for...' exclusions (e.g. taproom-ops.md L3 'Use when the user asks about premises licence conditions... Do NOT use to WRITE the prose of T&Cs...')."
+    },
+    {
+      "text": "Each subagent body contains 6 sections: Identity, Voice, Analytical Frameworks, Boundaries, Failure Modes, Standing Instructions",
+      "passed": true,
+      "evidence": "All four files have headings ## Identity, ## Voice, ## Analytical Frameworks, ## Boundaries, ## Failure Modes, ## Standing Instructions (e.g. brand-lead.md L9, L13, L21, L29, L40, L48)."
+    },
+    {
+      "text": "Each subagent's Boundaries section includes Owns, Does not own, and Hands off to subsections",
+      "passed": true,
+      "evidence": "Each file's Boundaries section has **Owns:**, **Does not own:**, **Hands off to:** (e.g. brand-lead.md L31, L33, L35; same pattern across content-lead, web-engineer, taproom-ops)."
+    },
+    {
+      "text": "No two agents claim ownership of the same concern in the ownership map",
+      "passed": true,
+      "evidence": "COMPANY.md L76 explicitly states 'No concern owned by two agents.' Each row in the L36-74 ownership-map table lists a single owner; notes like 'Prose is content-lead' on taproom-ops rows clarify split responsibility without shared ownership."
+    },
+    {
+      "text": "No agent-company/ folder is created in the sandbox (obsolete pattern)",
+      "passed": true,
+      "evidence": "ls of outputs/ shows only .claude/, agents/, agent-calibration/, COMPANY.md, activation-summary.md; no agent-company/ directory."
+    },
+    {
+      "text": "Calibration transcripts, if persisted, live under .claude/agent-calibration/ or agent-calibration/ (never elsewhere)",
+      "passed": true,
+      "evidence": "Both agent-calibration/ (outputs root) and .claude/agent-calibration/ directories exist and are empty; no calibration transcripts persisted elsewhere — calibration results are reported inline in activation-summary.md L16-66, which is not a transcript. Vacuously satisfied."
+    },
+    {
+      "text": "The executor challenged the user's initial 3-agent suggestion rather than blindly accepting it",
+      "passed": true,
+      "evidence": "COMPANY.md L32 'The user proposed three agents — design, content, web-dev — which is a natural first split but leaves a material concern orphaned: UK alcohol-licensed commerce compliance.' Four-agent roster justified."
+    },
+    {
+      "text": "SEO or visibility is explicitly addressed — as its own agent, or assigned in the ownership map",
+      "passed": true,
+      "evidence": "COMPANY.md L48 'SEO keyword strategy (organic) | content-lead' and L59 'Schema markup, sitemap, robots | web-engineer' — SEO split between content-lead and web-engineer in the ownership map."
+    },
+    {
+      "text": "An activation summary artefact exists (activation-summary.md or equivalent) reporting what was built, calibration results per agent, and routing sanity check result",
+      "passed": true,
+      "evidence": "activation-summary.md exists with '## Files written' (L3), per-agent calibration tables L20-63, and '## Routing sanity check' L68-96."
+    },
+    {
+      "text": "The routing sanity check was run and its result (clean or flagged prompts) is reported in the activation summary",
+      "passed": true,
+      "evidence": "activation-summary.md L72-85 reports 12 prompts run twice; prompt 11 initially flagged as ambiguous between content-lead and taproom-ops, resolved by description edits (L87-96 '### Flag resolved'); re-run clean."
+    },
+    {
+      "text": "Each subagent Voice section includes at least 2 example sentences with specific, realistic content (not placeholder text)",
+      "passed": true,
+      "evidence": "Each Voice section has two block-quoted concrete examples (e.g. brand-lead.md L17, L19 'strong ascender'/'objects, not stickers'; taproom-ops.md L17, L19 'Royal Mail won't carry alcohol'/'Challenge 25')."
+    },
+    {
+      "text": "Each subagent Analytical Frameworks section includes at least 2 named domain-specific frameworks with concrete criteria",
+      "passed": true,
+      "evidence": "All four files name 3 frameworks with concrete criteria, e.g. web-engineer.md L23-27 (Core Web Vitals budget with LCP<2.5s/CLS<0.1/INP<200ms, WCAG 2.2 AA checklist, Buy-vs-build matrix); taproom-ops.md L23-27 (Licensing Act 2003, HMRC duty + SPR, Alcohol e-commerce compliance stack)."
+    },
+    {
+      "text": "At least one framework per agent names a domain-specific source (regulator, named methodology, official standard, published benchmark) — not a generic business tool",
+      "passed": true,
+      "evidence": "brand-lead.md L25 names 'Portman Group Code'; content-lead.md L23 names 'CAP Code (non-broadcast) Section 18'; web-engineer.md L23 names 'Core Web Vitals' (Google) and L25 'WCAG 2.2 AA'; taproom-ops.md L23 'Licensing Act 2003 + Bristol licensing policy' and L25 'HMRC Small Producer Relief'."
+    },
+    {
+      "text": "Each subagent Failure Modes section contains at least 3 role-specific failure modes (not generic advice)",
+      "passed": true,
+      "evidence": "Each file lists 5-6 role-specific failure modes, e.g. content-lead.md L42-46 covers tasting-note generic descriptors, CAP/ASA memory-quoting, unverified SEO volume, orphan blog posts, labelling-copy memory-quoting."
+    },
+    {
+      "text": "Each subagent Failure Modes includes a failure mode about relying on training data instead of researching current sources",
+      "passed": true,
+      "evidence": "brand-lead.md L44 'Citing the current Portman Group Code or ASA/CAP alcohol-advertising rules from memory'; content-lead.md L43 'Quoting the current CAP Code or ASA ruling precedents from memory'; web-engineer.md L45 'Quoting current Shopify/Stripe/payment-processor fee structures... from memory'; taproom-ops.md L42 'Quoting the current UK alcohol duty rate... from memory'."
+    },
+    {
+      "text": "Each subagent Standing Instructions includes an instruction about verifying claims against current sources with URL citation",
+      "passed": true,
+      "evidence": "brand-lead.md L51 'cite URLs before signing off'; content-lead.md L51 'cite URLs'; web-engineer.md L52 'cite URLs before committing'; taproom-ops.md L52 'cite URLs every time'."
+    },
+    {
+      "text": "Each subagent Standing Instructions mentions consulting persistent memory at session start and saving learnings after significant tasks",
+      "passed": true,
+      "evidence": "Each file's first Standing Instruction bullet says 'Consult persistent memory at session start...' and 'Save [a log entry] after...' (brand-lead.md L50, content-lead.md L50, web-engineer.md L51, taproom-ops.md L51)."
+    },
+    {
+      "text": "Each subagent Standing Instructions references COMPANY.md at the project root for conflict resolution",
+      "passed": true,
+      "evidence": "brand-lead.md L52 'Reference `COMPANY.md` at project root for the brand/content/web boundary edges'; content-lead.md L52 same; web-engineer.md L53 'Reference `COMPANY.md` for boundary edges'; taproom-ops.md L53 'Reference `COMPANY.md` for boundary edges'."
+    },
+    {
+      "text": "The ownership map in COMPANY.md is consistent with the Owns sections in each subagent file — no discrepancies",
+      "passed": true,
+      "evidence": "Cross-check: COMPANY.md L38-50 (brand-lead rows: logo, colour, typography, photography, labels, merch, brand guidelines) matches brand-lead.md L31 Owns. L45-52 content-lead rows (site copy, products, blog, SEO, metadata, newsletter, T&C prose, CAP/ASA written) match content-lead.md L31. L53-63 web-engineer rows match web-engineer.md L31. L64-74 taproom-ops rows match taproom-ops.md L31. No concern appears in two Owns sections."
+    },
+    {
+      "text": "Tools field is scoped per agent (writer agents lack Bash; research agents lack Edit unless justified)",
+      "passed": true,
+      "evidence": "brand-lead.md L4 'Read, Write, Edit, WebSearch, WebFetch' (no Bash); content-lead.md L4 same (no Bash); taproom-ops.md L4 same (no Bash); web-engineer.md L4 'Read, Write, Edit, Bash, Grep, Glob, WebSearch, WebFetch' (Bash justified for build/CI work). Writer/compliance agents lack Bash; engineer has it."
+    }
+  ],
+  "claims": [
+    "Four-agent roster (brand-lead, content-lead, web-engineer, taproom-ops) is defended with a concrete orphan-concern argument rather than asserted.",
+    "Routing sanity check surfaced a real ambiguity (prompt 11 — booking cancellation policy) and resolved it via description edits, not hand-waved.",
+    "Tool scoping is defensible: only web-engineer gets Bash/Grep/Glob; all four get WebSearch/WebFetch (justified for regulator verification).",
+    "COMPANY.md overtly states the sandbox path-substitution and preserves memory: project so files relocate cleanly to .claude/agents/.",
+    "Each agent cites specific UK regulators by name (Portman Group, CAP Section 18, HMRC SPR, Bristol City Council, FSA, ICO/PECR, Royal Mail prohibited-items list), not generic 'regulations'."
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 2 asks for a 'conflict resolution table' but the output uses a bulleted list covering the same ground. Consider loosening phrasing to 'section' or 'table/list' — the substantive requirement (addressing boundary edges) is met, and enforcing a table format would reward cosmetics over substance.",
+      "Assertion 11 ('Calibration transcripts, if persisted, live under .claude/agent-calibration/ or agent-calibration/') is trivially satisfied when no transcripts are persisted. Consider requiring transcripts to exist OR removing the assertion — the current phrasing lets an agent pass by not producing calibration artefacts at all.",
+      "No assertion covers the quality of the routing sanity check (was it genuinely adversarial, did it catch a real edge?). This executor found a real ambiguity on prompt 11; a weaker one could pass assertion 15 with 12 trivially-routed prompts. Consider adding an assertion like 'At least one routing prompt tests a genuine boundary edge between two agents.'",
+      "No assertion covers whether the agent descriptions were revised based on the routing sanity check (closed-loop behaviour). This executor did revise two descriptions; catching that in an assertion would reward the full loop.",
+      "No assertion checks that the Identity section situates the agent in the specific domain (e.g. Bristol beer scene, Licensing Act 2003). The strong outputs do this; weak outputs would write generic bios."
+    ],
+    "overall": "Assertions are mostly well-calibrated and caught substantive quality. Two soft spots: the conflict-resolution-table phrasing is format-prescriptive, and the 'if persisted' clause on calibration transcripts lets absence count as compliance. All 25 assertions pass on this output, but the pass is substantive rather than lucky — the executor produced a genuinely four-agent-defended roster with a real routing-sanity flag and a resolved description tightening."
+  },
+  "summary": {
+    "passed": 25,
+    "failed": 0,
+    "total": 25,
+    "pass_rate": 1.0
+  }
+}
