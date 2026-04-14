@@ -173,70 +173,78 @@ Do NOT include a "Source of Truth" section — the Standing Instructions and nat
 Do NOT create any directories under `agent-company/` — that pattern is obsolete.
 ```
 
-### Step 2.2 — Reload subagents into the session
+### Step 2.2 — End session 1: emit the handoff prompt
 
-Claude Code loads subagents at session start. Files written during Step 2.1 are on disk but not yet addressable in this session. Before dispatching, tell the user to run `/agents` in the CLI, which reloads the registry from disk without a restart. Wait for them to confirm it has run, then proceed to Step 2.3. Do not attempt a fresh-session handoff — it breaks the skill in half.
+Subagents written in Step 2.1 cannot be dispatched by `subagent_type: {name}` in the current session — Claude Code registers subagent types at session start, and neither the `/agents` picker nor file writes update the running session's Agent tool schema. Calibration must therefore run in a fresh session.
 
-### Step 2.3 — Test each subagent with real dispatch
+Instead of leaving the user to improvise a bridge, session 1 ends by **printing a complete, self-contained handoff prompt** inside a single fenced code block. The user copies that block verbatim into a new Claude Code session in the same project directory, and session 2 picks up the work with zero context reconstruction.
 
-Testing must be real, not narrated. You now have native subagents — dispatch them via the Agent tool with `subagent_type: {lowercase_name}` and grade their responses.
+**Before emitting the block, do this in session 1:**
+1. Generate the 6 calibration questions per agent (categories listed below) so session 2 does not have to rediscover project context.
+2. For each question, write the strong-answer and failing-answer criteria.
+3. Compile everything into the template below.
 
-For each agent, generate 6 calibration questions:
+**Calibration question categories** (use these exact labels in the handoff):
 
 1. **Domain competence** — A question only a genuine domain expert would answer well.
 2. **Boundary respect** — A question that tempts the agent to overstep into another agent's territory.
 3. **Handoff recognition** — A scenario where the agent should recognise it needs to hand off to a colleague.
 4. **Source-of-truth adherence** — A question where the answer should come from a project file or live source, not general knowledge.
 5. **Voice consistency** — A request that tests whether the agent maintains its defined voice under pressure (vague or confrontational prompt).
-6. **Research-first** — A question where the agent would be tempted to answer from training data (market trends, salary ranges, legal requirements). A strong answer flags the need to verify and cites sources.
+6. **Research-first** — A question where the agent would be tempted to answer from training data. A strong answer flags the need to verify and cites sources.
 
-For each question, define what a **strong answer** looks like and what a **failing answer** looks like.
+**Emit exactly this to the user**, replacing placeholders with real values:
 
-**Run the tests using the Agent tool:**
+> The agent team is written to `.claude/agents/`. Calibration has to run in a fresh Claude Code session because Claude Code only registers subagents at session start.
+>
+> **Next step: open a new Claude Code session in this project directory, then paste the block below as your first message.**
+>
+> ```
+> You are resuming an agent-company creation pipeline. Everything below is self-contained — do not re-invoke the agent-company-creator skill.
+>
+> CONTEXT:
+> - Project: {one-line project description}
+> - Team blueprint: COMPANY.md at project root
+> - Agents to calibrate (lowercase names): {comma-separated list}
+> - Agent files: .claude/agents/{name}.md for each
+>
+> YOUR JOB — for each agent, in parallel where possible:
+>
+> 1. Read .claude/agents/{name}.md to load the persona into working memory.
+>
+> 2. Dispatch the subagent via the Agent tool with subagent_type: {name} and this prompt:
+>
+>    Answer these 6 calibration questions in one response, numbered. Stay in character — use your defined voice, respect your boundaries, cite sources rather than inventing answers.
+>
+>    1. {Domain competence question for this agent}
+>    2. {Boundary respect question}
+>    3. {Handoff recognition question}
+>    4. {Source-of-truth adherence question}
+>    5. {Voice consistency question}
+>    6. {Research-first question}
+>
+> 3. Grade each answer against these criteria — a response passes only if it:
+>    - Demonstrates genuine domain thinking (not generic advice)
+>    - Respects boundaries (doesn't do another agent's work)
+>    - Recognises handoff situations
+>    - Cites sources on factual claims rather than inventing
+>    - Maintains the defined voice
+>    - Flags the need to verify on research-first questions
+>
+> 4. If any question fails: identify the root cause (persona too vague, missing framework, unclear boundary, loose description), revise the specific section of .claude/agents/{name}.md, re-dispatch only the failed questions. Cap at 5 iterations per agent. If still failing after 5, save what you have and flag to the user: "The {Agent} persona needs your input — here's what's not working: {specific issue}."
+>
+> 5. Write the calibration transcript to .claude/agent-calibration/{name}.md. Do NOT create any directory under agent-company/.
+>
+> After all agents pass (or are flagged), run the Phase 3 activation checks: verify .claude/agents/*.md exists, verify ./agents/ does NOT exist at project root, confirm COMPANY.md and CLAUDE.md are present, and report the final activation summary to the user.
+> ```
 
-For each agent, dispatch once with all 6 questions in a single prompt:
-
-```
-Agent tool call:
-  subagent_type: {lowercase_name}
-  prompt: |
-    Answer these 6 calibration questions, one at a time. Stay in character — use your defined voice, respect your boundaries, cite sources rather than inventing answers.
-
-    1. {calibration question 1}
-    2. {calibration question 2}
-    ...
-    6. {calibration question 6}
-
-    Return your 6 answers in one response with clear numbering.
-```
-
-Keep calibration transcripts as ephemeral session artefacts. If you need a durable record, write them under `.claude/agent-calibration/{lowercase_name}.md` — do NOT create `agent-company/` for this. The `agent-company/` pattern is obsolete in v2.1; reviving it here would contradict the skill's own output contract.
-
-**Grade the responses:**
-
-After each dispatch completes, grade each answer. A response passes if it:
-- Demonstrates genuine domain thinking (not generic advice)
-- Respects boundaries (doesn't do another agent's work)
-- Recognises handoff situations
-- Cites sources on factual claims rather than inventing
-- Maintains the defined voice
-- Flags the need to verify on research-first questions
-
-### Step 2.4 — Iterate on failures
-
-If any calibration question fails:
-1. Identify the root cause — persona too vague? Missing framework? Boundary not clear? Description too loose for auto-routing?
-2. Revise the specific section of `.claude/agents/{name}.md` (body or frontmatter).
-3. Re-dispatch the subagent with the revised persona.
-4. Only re-test the failed questions.
-
-Cap at 5 iterations per agent. If an agent can't pass after 5 rounds, save what you have and flag to the user: "The {Agent} persona needs your input — here's what's not working: {specific issue}."
-
-Calibration records (if written to disk) belong in `.claude/agent-calibration/` — never in `agent-company/`.
+**Then stop.** Do not attempt to dispatch calibration in session 1. Do not run Phase 3. Session 1's job ends at printing the block above; session 2 owns testing, iteration, and activation.
 
 ---
 
 ## Phase 3 — Company Activation
+
+> **Runs in session 2**, after calibration completes. The handoff prompt from Step 2.2 instructs the new session to run these checks. Session 1 never reaches this phase.
 
 ### Step 3.1 — Path check (hard fail)
 
