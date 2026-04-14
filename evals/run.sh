@@ -19,7 +19,7 @@ mkdir -p "$RESULTS"
 command -v claude >/dev/null || { echo "claude CLI not on PATH"; exit 1; }
 command -v jq >/dev/null || { echo "jq not on PATH"; exit 1; }
 
-SKILLS=(agent-company-creator send-brief board-meeting)
+SKILLS=(agent-company-creator board-meeting)
 
 # Build the baseline accumulator; we rewrite baseline.json if missing at the end.
 CURRENT_JSON='{}'

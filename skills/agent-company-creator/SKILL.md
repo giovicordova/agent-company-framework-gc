@@ -234,7 +234,23 @@ Calibration records (if written to disk) belong in `.claude/agent-calibration/` 
 
 ## Phase 3 — Company Activation
 
-### Step 3.1 — Cross-check
+### Step 3.1 — Path check (hard fail)
+
+Before any other cross-check, verify agent files landed at the correct path. In sandboxed or headless environments the `.claude/` prefix is sometimes silently stripped, producing a non-functional `agents/` directory at the project root.
+
+Run this check:
+
+```bash
+# Must exist and contain one .md file per designed agent
+ls .claude/agents/*.md 2>/dev/null | wc -l
+
+# Must NOT exist at project root (without the .claude/ prefix)
+test ! -d ./agents || echo "PATH-FAIL: ./agents/ exists — files did not land in .claude/agents/"
+```
+
+If `.claude/agents/*.md` count is less than the number of agents you designed, or `./agents/` exists at the root, **stop and fix before continuing**. Do not silently accept files at `./agents/` — Claude Code will not discover them and the company will be non-functional. Move the files with `mkdir -p .claude/agents && mv agents/*.md .claude/agents/ && rmdir agents`, then re-run the check.
+
+### Step 3.2 — Cross-check
 
 Read all `.claude/agents/*.md` files and the project root `COMPANY.md` (if one already exists) and verify:
 
@@ -246,7 +262,7 @@ Read all `.claude/agents/*.md` files and the project root `COMPANY.md` (if one a
 
 Fix any inconsistency before proceeding.
 
-### Step 3.2 — Write COMPANY.md at project root
+### Step 3.3 — Write COMPANY.md at project root
 
 Create or overwrite `COMPANY.md` at the project root with:
 
@@ -255,6 +271,10 @@ Create or overwrite `COMPANY.md` at the project root with:
 
 > Created: {date}
 > Agents: {count}
+
+## Team sizing rationale
+
+{One line. Defend the headcount explicitly, e.g. "Considered 4 and 7; picked {N} because {primary reason — coverage gap / redundancy avoided / project scope}. {Discarded option} would have {specific consequence}."} This line is mandatory — a defensible company design looks different from one that blindly accepted a number.
 
 ## Agents
 
@@ -280,11 +300,11 @@ Create or overwrite `COMPANY.md` at the project root with:
 4. Agents manage their own persistent memory under `.claude/agent-memory/{name}/` — no manual maintenance required.
 ```
 
-### Step 3.3 — Wire CLAUDE.md
+### Step 3.4 — Wire CLAUDE.md
 
 Check if the project has a root `CLAUDE.md`. If yes, append `@COMPANY.md` at the bottom so the ownership map loads with every session. If no, create a minimal CLAUDE.md with a link to the README and the `@COMPANY.md` import.
 
-### Step 3.4 — Dry run
+### Step 3.5 — Dry run
 
 Pick a realistic task that crosses at least one agent boundary. Walk it through the team mentally:
 - Which agent would handle it first?
@@ -294,7 +314,7 @@ Pick a realistic task that crosses at least one agent boundary. Walk it through 
 
 Report results. If the dry run reveals gaps (orphaned steps, ambiguous handoffs), fix them before declaring done.
 
-### Step 3.5 — Deliver
+### Step 3.6 — Deliver
 
 Confirm the final structure:
 

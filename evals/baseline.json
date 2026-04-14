@@ -1,0 +1,14 @@
+{
+  "_note": "Seeded from workspace iteration-1 grading (with_skill). Replace with a full ./evals/run.sh output once skill eval cases are in place locally. Regressions beyond EVAL_TOLERANCE fail the run.",
+  "agent-company-creator": {
+    "1": {"passed": 19, "total": 20},
+    "2": {"passed": 20, "total": 20},
+    "3": {"passed": 20, "total": 20}
+  },
+  "board-meeting": {
+    "1": {"passed": 9, "total": 10},
+    "2": {"passed": 6, "total": 8},
+    "3": {"passed": 3, "total": 3},
+    "4": {"passed": 6, "total": 7}
+  }
+}
