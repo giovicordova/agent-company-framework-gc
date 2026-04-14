@@ -24,8 +24,9 @@ evals/results/
 **/board-meeting-workspace/
 **/*-workspace/
 
-# Personal eval cases for agent-company-creator (project-specific examples)
+# Personal eval cases (project-specific examples) — run.sh handles absence
 skills/agent-company-creator/evals/
+skills/board-meeting/evals/
 
 # Per-user state stays local
 .claude/agent-memory/
