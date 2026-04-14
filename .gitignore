@@ -1,8 +1,33 @@
-# Ignore everything
+# Ignore everything by default.
 *
 
-# Allow these
+# Framework source
 !README.md
+!CLAUDE.md
+!.gitignore
+
 !skills/
 !skills/**
-!.gitignore
+
+# Native subagents and COMPANY.md (committed as reference examples)
+!.claude/
+!.claude/agents/
+!.claude/agents/**
+!COMPANY.md
+
+# Eval harness and baseline (but not per-run artefacts)
+!evals/
+!evals/**
+evals/results/
+
+# Per-run and workspace noise
+**/board-meeting-workspace/
+**/*-workspace/
+
+# Per-user state stays local
+.claude/agent-memory/
+.claude/agent-memory-local/
+.claude/skills/
+.claude/settings.json
+.claude/settings.local.json
+agent-company.legacy/

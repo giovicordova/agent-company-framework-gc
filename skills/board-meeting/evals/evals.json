@@ -17,7 +17,7 @@
         "Strategist references 3-axis check or market/revenue concepts",
         "Editor references Scan Test or clarity concerns",
         "Recruiter references calibration protocol or people/team concerns",
-        "At least one agent references a named framework from its PERSONA.md (not generic advice)",
+        "At least one agent references a named framework from its subagent definition (not generic advice)",
         "If any agent makes a factual claim about market data or statistics, it flags uncertainty or cites a source rather than stating it as fact"
       ]
     },
@@ -61,7 +61,7 @@
         "Each agent surfaces a realistic risk or counterpoint",
         "Meeting ends with approval prompt",
         "After approval, asks whether to save or keep in chat (AskUserQuestion or equivalent)",
-        "At least one agent references a named framework from its PERSONA.md"
+        "At least one agent references a named framework from its subagent definition"
       ]
     },
     {

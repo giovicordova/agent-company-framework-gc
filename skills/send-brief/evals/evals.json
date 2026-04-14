@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Send a brief to the Editor about the homepage copy. We decided to remove pricing from the hero section, replace the first bullet with 'First file free. No credit card needed.', and fix the cost table because 8 hours should be $240 not $280. I'm the Strategist.",
-      "expected_output": "A polished brief from Strategist to Editor with clear context, checkbox action items, and self-contained content the Editor can act on cold.",
+      "expected_output": "A polished brief from Strategist to Editor with clear context, checkbox action items, and self-contained content. After user approval, dispatched as a live subagent call.",
       "files": [],
       "expectations": [
         "Brief has From field showing Strategist (not 'Specialist' or 'Analyst')",
@@ -13,10 +13,9 @@
         "At least 3 checkbox items corresponding to the 3 changes described",
         "Brief includes an Expected Outcome section",
         "Expected Outcome references the checkboxes",
-        "Brief includes the archive instruction: move to mailbox/archive/ when complete",
         "Brief is self-contained — a reader without this conversation context can understand what to do",
-        "Brief is saved to agent-company/editorial/mailbox/ or equivalent Editor mailbox path",
-        "User is shown the brief for review before saving"
+        "After review, the skill dispatches the Editor via the Agent tool (subagent_type: editor) — not a mailbox file write",
+        "User is shown the brief for review before dispatching"
       ]
     },
     {
@@ -32,8 +31,9 @@
         "All actionable items are markdown checkboxes (- [ ])",
         "Each brief includes the archive instruction",
         "From field shows Editorial in both briefs",
-        "Recipient's PERSONA.md was read before writing (evidence: domain-appropriate language or framework references)",
-        "User is shown briefs for review before saving"
+        "Recipient's .claude/agents/{name}.md was read before writing (evidence: domain-appropriate language or framework references)",
+        "After review, each recipient is dispatched via the Agent tool (subagent_type: {name}), sequentially",
+        "User is shown briefs for review before dispatching"
       ]
     },
     {
