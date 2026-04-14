@@ -24,6 +24,9 @@ evals/results/
 **/board-meeting-workspace/
 **/*-workspace/
 
+# Personal eval cases for agent-company-creator (project-specific examples)
+skills/agent-company-creator/evals/
+
 # Per-user state stays local
 .claude/agent-memory/
 .claude/agent-memory-local/

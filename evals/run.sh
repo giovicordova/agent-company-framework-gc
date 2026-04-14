@@ -30,6 +30,10 @@ echo
 
 for skill in "${SKILLS[@]}"; do
   EVALS="$ROOT/skills/$skill/evals/evals.json"
+  if [[ ! -f "$EVALS" ]]; then
+    echo "[$skill] skipped — no evals/evals.json (not tracked in this repo)"
+    continue
+  fi
   NUM=$(jq '.evals | length' "$EVALS")
   echo "[$skill] $NUM cases"
 
