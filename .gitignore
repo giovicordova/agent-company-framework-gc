@@ -7,10 +7,6 @@
 !skills/
 !skills/**
 
-# Personal eval cases (project-specific examples) stay local
-skills/agent-company-creator/evals/
-skills/board-meeting/evals/
-
 # Workspace and run artefacts even under whitelists
 **/board-meeting-workspace/
 **/*-workspace/

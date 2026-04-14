@@ -1,10 +1,11 @@
 # Agent Company Framework
 
-Three skills for building and running project-specific agent teams as native Claude Code subagents with persistent memory.
+Two skills for building and running project-specific agent teams as native Claude Code subagents with persistent memory.
 
 - **`/agent-company-creator`** — Design, generate, and validate a team. Interactive design → autonomous build → tested delivery.
-- **`/send-brief`** — Turn conversation into a structured brief and dispatch a subagent in-session.
 - **`/board-meeting`** — Sequential round-table across all agents, unified recommendation.
+
+Structured handoff to a single agent uses Claude Code's native subagent dispatch — no dedicated skill needed.
 
 ## Architecture
 
@@ -40,7 +41,6 @@ git clone <this repo> my-project-agents
 cd my-project-agents
 mkdir -p .claude/skills
 ln -sfn "$PWD/skills/agent-company-creator" .claude/skills/agent-company-creator
-ln -sfn "$PWD/skills/send-brief"            .claude/skills/send-brief
 ln -sfn "$PWD/skills/board-meeting"         .claude/skills/board-meeting
 ```
 
@@ -48,7 +48,6 @@ ln -sfn "$PWD/skills/board-meeting"         .claude/skills/board-meeting
 
 ```bash
 ln -sfn "$PWD/skills/agent-company-creator" ~/.claude/skills/agent-company-creator
-ln -sfn "$PWD/skills/send-brief"            ~/.claude/skills/send-brief
 ln -sfn "$PWD/skills/board-meeting"         ~/.claude/skills/board-meeting
 ```
 
@@ -65,10 +64,7 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 2.1.59+ (
 # "Editor, scan-test this paragraph: ..."
 # "Strategist, what's the moat on this?"
 
-# 4. Hand work with formal context
-/send-brief
-
-# 5. Get the whole board on a decision
+# 4. Get the whole board on a decision
 /board-meeting
 ```
 

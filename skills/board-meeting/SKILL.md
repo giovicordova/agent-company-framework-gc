@@ -99,7 +99,7 @@ If Gio amends, re-dispatch only the affected agents, not the full board.
 
 ### 9. Save to file (if requested)
 
-If Gio chooses to save, write to `docs/board-meetings/YYYYMMDD-HHMM-NNN-bm.md`. Create the directory if missing. `NNN` is zero-padded sequential starting at `001` for the day (check the folder for existing files from the same day to determine the next number).
+If Gio chooses to save, write to `.claude/board-meetings/YYYYMMDD-HHMM-NNN-bm.md`. Create the directory if missing. `NNN` is zero-padded sequential starting at `001` for the day (check the folder for existing files from the same day to determine the next number).
 
 Document structure (summary leads, discussion follows):
 
@@ -137,6 +137,6 @@ Works with 2 agents or 20. Two rules:
 
 ## What this skill is not
 
-- Not a replacement for `/send-brief` — that's for async handoff or single-agent dispatch. Board meeting is a multi-agent synchronous discussion.
+- Not a replacement for single-agent dispatch — for one-on-one handoff, use Claude Code's native subagent call directly. Board meeting is a multi-agent synchronous discussion.
 - Not a place to execute the recommendation. The meeting ends at approval; execution happens afterwards.
 - Not a place for deep research mid-meeting. If an agent needs info they don't have, they flag it as a follow-up — they don't stall the room.

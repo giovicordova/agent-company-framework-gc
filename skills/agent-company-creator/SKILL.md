@@ -24,7 +24,7 @@ Phase 1 is interactive. Phases 2 and 3 are autonomous.
 
 **What this skill does not create** (by design):
 - No `agent-company/` folder. Persistent memory is native in Claude Code.
-- No `mailbox/` — handoffs happen via live subagent dispatch through `/send-brief` or the main session calling the `Agent` tool.
+- No `mailbox/` — handoffs happen via native subagent dispatch (the main session calls the `Agent` tool, or Claude Code auto-routes via `description` frontmatter).
 - No per-agent `knowledge/`, `mistakes.md`, or `shared.md` files. Native subagent memory covers knowledge and self-correction. Durable cross-agent facts go into project `CLAUDE.md`.
 
 ---
@@ -275,10 +275,9 @@ Create or overwrite `COMPANY.md` at the project root with:
 ## How to work with this company
 
 1. Ask questions that match an agent's `description` — Claude Code auto-routes. Or run `/agents` to see the roster.
-2. For formal handoffs with structured context, use `/send-brief` — it dispatches a live subagent.
-3. For multi-agent decisions, use `/board-meeting` — sequential subagent round-table.
-4. Durable cross-agent facts (voice rulings, strategic pivots, new roles) go into project `CLAUDE.md` so every subagent sees them.
-5. Agents manage their own persistent memory under `.claude/agent-memory/{name}/` — no manual maintenance required.
+2. For multi-agent decisions, use `/board-meeting` — sequential subagent round-table.
+3. Durable cross-agent facts (voice rulings, strategic pivots, new roles) go into project `CLAUDE.md` so every subagent sees them.
+4. Agents manage their own persistent memory under `.claude/agent-memory/{name}/` — no manual maintenance required.
 ```
 
 ### Step 3.3 — Wire CLAUDE.md
@@ -310,4 +309,4 @@ COMPANY.md               # Ownership map + conflict rules (imported by CLAUDE.md
 CLAUDE.md                # Project instructions; imports COMPANY.md at the bottom
 ```
 
-Tell the user: "Your agent company is ready. Here's who's on the team: {summary}. Ask them questions directly (Claude auto-routes via their descriptions) or use `/send-brief` for structured handoff and `/board-meeting` for multi-agent decisions. Their persistent memory will populate as they work."
+Tell the user: "Your agent company is ready. Here's who's on the team: {summary}. Ask them questions directly — Claude auto-routes via their descriptions — or use `/board-meeting` for multi-agent decisions. Their persistent memory will populate as they work."
