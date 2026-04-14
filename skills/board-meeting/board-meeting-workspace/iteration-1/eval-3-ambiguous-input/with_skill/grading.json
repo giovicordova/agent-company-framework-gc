@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Does NOT run a full board meeting immediately — no agent turn headers appear", "passed": true, "evidence": "No ## Agent headers appear. Output is 'Board Meeting — awaiting clarification' followed by a single question."},
+    {"text": "Asks exactly one clarifying question", "passed": true, "evidence": "'what specifically is \"the thing we discussed\"? Give me the topic, decision, or question you want the board to weigh in on'"},
+    {"text": "Does not ask multiple questions or run an extended interview", "passed": true, "evidence": "Single question only, commits to running the meeting immediately once answered."}
+  ],
+  "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.00}
+}

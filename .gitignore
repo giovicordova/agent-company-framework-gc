@@ -1,13 +1,16 @@
 # Ignore everything by default.
 *
 
-# Public surface: skills + README only
+# Public surface: skills + root evals + README only
 !README.md
 !.gitignore
 !skills/
 !skills/**
+!evals/
+!evals/**
 
-# Workspace and run artefacts even under whitelists
-**/board-meeting-workspace/
-**/*-workspace/
+# Skill-specific eval cases stay local
+skills/**/evals/
+
+# Run artefacts even under whitelists
 **/calibration-responses.md

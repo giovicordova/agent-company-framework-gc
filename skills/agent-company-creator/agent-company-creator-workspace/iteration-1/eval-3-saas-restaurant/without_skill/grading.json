@@ -1,0 +1,142 @@
+{
+  "eval_id": 3,
+  "eval_name": "saas-restaurant-existing-codebase-v2.1",
+  "mode": "without_skill",
+  "total": 20,
+  "passed": 2,
+  "failed": 18,
+  "pass_rate": 0.10,
+  "timing": {
+    "total_tokens": 36822,
+    "duration_ms": 163920,
+    "tool_uses": 14
+  },
+  "assertions": [
+    {
+      "id": 1,
+      "text": "COMPANY.md exists at sandbox root with ownership map table (Concern, Owner, Notes)",
+      "status": "FAIL",
+      "evidence": "COMPANY.md exists but the table has columns 'Agent | Role | Primary concern' — not 'Concern | Owner | Notes'. Not an ownership map in the required schema."
+    },
+    {
+      "id": 2,
+      "text": "COMPANY.md contains conflict resolution table addressing boundary edges",
+      "status": "FAIL",
+      "evidence": "No conflict resolution table present. Only a brief 'Collaboration' section with 3 bullets about inbox paths."
+    },
+    {
+      "id": 3,
+      "text": "Each agent file has YAML frontmatter with name, description, tools, model, memory",
+      "status": "FAIL",
+      "evidence": "Frontmatter only contains name, description, tools. Missing 'model' and 'memory' fields across all 6 agents."
+    },
+    {
+      "id": 4,
+      "text": "Each subagent frontmatter includes memory: project",
+      "status": "FAIL",
+      "evidence": "No 'memory' field present in any of the 6 agent files."
+    },
+    {
+      "id": 5,
+      "text": "Each description reads as routing trigger with inclusion AND exclusion criteria",
+      "status": "FAIL",
+      "evidence": "Descriptions list inclusion triggers ('Use for...', 'Triggers on...') but no exclusion criteria (no 'Do not use for...' or 'NOT for...' clauses)."
+    },
+    {
+      "id": 6,
+      "text": "Each body contains 6 sections: Identity, Voice, Analytical Frameworks, Boundaries, Failure Modes, Standing Instructions",
+      "status": "FAIL",
+      "evidence": "product-strategist has sections: Users you serve, Your job, Method, Stay in lane, Flag when, Output style. None of the 6 required section headings appear in any agent file."
+    },
+    {
+      "id": 7,
+      "text": "Each Boundaries section has Owns, Does not own, Hands off to subsections",
+      "status": "FAIL",
+      "evidence": "No 'Boundaries' section exists. 'Stay in lane' exists but lacks the tripartite Owns/Does not own/Hands off to structure."
+    },
+    {
+      "id": 8,
+      "text": "No two agents claim ownership of the same concern in the ownership map",
+      "status": "PASS",
+      "evidence": "The 'Primary concern' column in COMPANY.md shows 6 distinct concerns with no overlap. (Assertion satisfied on a loose reading; the schema table is wrong but non-overlapping.)"
+    },
+    {
+      "id": 9,
+      "text": "No agent-company/ folder created in sandbox",
+      "status": "PASS",
+      "evidence": "Only agents/ and COMPANY.md exist at outputs root. No agent-company/ directory created."
+    },
+    {
+      "id": 10,
+      "text": "At least one agent references actual codebase paths (src/app/, tailwind.config.ts, supabase/)",
+      "status": "FAIL",
+      "evidence": "COMPANY.md references paths but no agent file body mentions src/app/, tailwind.config.ts, or supabase/ explicitly. product-strategist and supabase-architect bodies do not cite these paths."
+    },
+    {
+      "id": 11,
+      "text": "Skill evaluates whether 6 agents is right vs blindly accepting user's suggestion",
+      "status": "FAIL",
+      "evidence": "Executor summary says '6 agents... Covers requested 4 domains plus 2 adjacent specialists'. Number accepted as given; no evidence of deliberation on whether 6 is optimal."
+    },
+    {
+      "id": 12,
+      "text": "Transcript shows evidence of running quality gate checklist before final delivery",
+      "status": "FAIL",
+      "evidence": "No quality gate checklist visible. COMPANY.md has a 'Ready-check' line but it's a 1-line claim, not a gate run. Only 14 tool uses for 6 agents + COMPANY.md — no iterative validation."
+    },
+    {
+      "id": 13,
+      "text": "Each Voice section includes 2+ example sentences with specific realistic content",
+      "status": "FAIL",
+      "evidence": "No 'Voice' section exists in any agent. 'Output style' exists but contains no example sentences."
+    },
+    {
+      "id": 14,
+      "text": "Each Analytical Frameworks section includes 2+ named domain-specific frameworks with concrete criteria",
+      "status": "FAIL",
+      "evidence": "No 'Analytical Frameworks' section. 'Method' sections contain procedural bullets (e.g., 'JTBD', 'steel-man') but no named frameworks with criteria."
+    },
+    {
+      "id": 15,
+      "text": "Each Failure Modes section contains 3+ role-specific failure modes",
+      "status": "FAIL",
+      "evidence": "No 'Failure Modes' section. 'Flag when' sections contain 3 items each but framed as user-triggered flags, not self-failure modes."
+    },
+    {
+      "id": 16,
+      "text": "Each Standing Instructions includes instruction about verifying claims against current sources with URL citation",
+      "status": "FAIL",
+      "evidence": "No 'Standing Instructions' section. No mention of URL citation or current-source verification in any agent file."
+    },
+    {
+      "id": 17,
+      "text": "Each Failure Modes includes a failure mode about relying on training data instead of researching current sources",
+      "status": "FAIL",
+      "evidence": "No Failure Modes section; no training-data caveat anywhere in agent files."
+    },
+    {
+      "id": 18,
+      "text": "Each Standing Instructions mentions consulting persistent memory at session start and saving learnings",
+      "status": "FAIL",
+      "evidence": "No Standing Instructions section; no persistent memory protocol in any agent."
+    },
+    {
+      "id": 19,
+      "text": "Each Standing Instructions references COMPANY.md at project root for conflict resolution",
+      "status": "FAIL",
+      "evidence": "No agent body references COMPANY.md. Cross-references are name-based only ('frontend-designer', 'marketing-writer')."
+    },
+    {
+      "id": 20,
+      "text": "Ownership map in COMPANY.md consistent with Owns sections in subagents — no discrepancies",
+      "status": "FAIL",
+      "evidence": "No 'Owns' sections exist in subagents to cross-check. Consistency cannot be verified; assertion fails on absence of the required structure."
+    }
+  ],
+  "top_failures": [
+    "v2.1 schema entirely absent: no Identity/Voice/Analytical Frameworks/Boundaries/Failure Modes/Standing Instructions sections in any of 6 agents.",
+    "Frontmatter missing required 'model' and 'memory: project' fields across all agents.",
+    "COMPANY.md lacks both ownership map (Concern/Owner/Notes) and conflict resolution table — core deliverables missing."
+  ],
+  "eval_feedback": "Assertions are well-targeted and discriminating: the v2.1 schema requirements (6 sections, frontmatter fields, tripartite Boundaries, URL-citation standing instructions) cleanly separated a without-skill baseline from what the skill should produce. Assertion 8 is weak — it passed despite the ownership map table having the wrong columns entirely, because non-overlap could be inferred from a substitute table. Consider rewording to require the assertion to fail if the required schema columns are absent. Assertion 10 could be tightened to specify which agent(s) should cite paths — restaurant-SaaS context suggests frontend-designer and supabase-architect specifically. Assertion 12 ('transcript shows quality gate') is hard to grade without the actual transcript; we only have the executor summary and timing. Consider requiring a gate artefact file. Overall the 20 assertions strongly incentivise the skill's adversarial layer and schema rigour."
+}

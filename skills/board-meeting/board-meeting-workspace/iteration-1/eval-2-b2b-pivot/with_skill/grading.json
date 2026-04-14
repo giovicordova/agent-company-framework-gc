@@ -1,0 +1,13 @@
+{
+  "expectations": [
+    {"text": "Output contains headers for all 3 agents", "passed": true, "evidence": "Strategist, Editor, Recruiter all present with domain headers"},
+    {"text": "At least one explicit disagreement is surfaced between agents", "passed": false, "evidence": "All three agents agreed (all objected to the pivot). Meeting noted 'No disagreement among board members' — no actual disagreement was generated despite the contentious topic."},
+    {"text": "Disagreement resolution follows COMPANY.md rules", "passed": true, "evidence": "Noted 'The Strategist's domain owns this decision per COMPANY.md' — correctly identified domain owner even though no real disagreement occurred."},
+    {"text": "Each agent turn is 60 words or fewer", "passed": false, "evidence": "Strategist: 90 words, Editor: 90 words, Recruiter: 79 words. All exceed the 60-word hard limit significantly."},
+    {"text": "Board Recommendation section exists", "passed": true, "evidence": "Board Recommendation present at 51 words"},
+    {"text": "Each agent includes a realistic risk or counterpoint", "passed": true, "evidence": "Strategist: acquisition cost without brand/budget; Editor: full rebrand cost; Recruiter: team skill gap is 6-month detour"},
+    {"text": "Agents engage with each other, not isolated monologues", "passed": true, "evidence": "Editor: 'Agreeing with the Strategist on the core risk'; Recruiter: 'Both previous speakers are right'"},
+    {"text": "Ends with approval prompt", "passed": true, "evidence": "'Approve, amend, or reject?'"}
+  ],
+  "summary": {"passed": 6, "failed": 2, "total": 8, "pass_rate": 0.75}
+}

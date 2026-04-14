@@ -1,0 +1,12 @@
+{
+  "expectations": [
+    {"text": "Output contains headers for all 3 agents", "passed": true, "evidence": "Recruiter, Editor, Strategist all present with domain headers"},
+    {"text": "Recruiter speaks first or second (domain owner for hiring topics)", "passed": true, "evidence": "Recruiter is first speaker — correct domain ordering"},
+    {"text": "Each agent turn is 60 words or fewer", "passed": false, "evidence": "Recruiter: 77 words, Editor: 85 words, Strategist: 77 words. All exceed 60-word limit."},
+    {"text": "Board Recommendation section exists and is 80 words or fewer", "passed": true, "evidence": "Board Recommendation present at 75 words"},
+    {"text": "Each agent surfaces a realistic risk or counterpoint", "passed": true, "evidence": "Recruiter: 'attracting generalists who churn shallow content'; Editor: 'hiring someone whose prose needs heavy editing'; Strategist: 'scope creep from part-time to full-time cost'"},
+    {"text": "Meeting ends with approval prompt", "passed": true, "evidence": "'Approve, amend, or reject?'"},
+    {"text": "After approval section, asks whether to save or keep in chat", "passed": true, "evidence": "'Keep this in the chat only, or save as a board meeting document?'"}
+  ],
+  "summary": {"passed": 6, "failed": 1, "total": 7, "pass_rate": 0.86}
+}

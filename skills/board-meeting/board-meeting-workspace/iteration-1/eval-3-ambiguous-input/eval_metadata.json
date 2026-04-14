@@ -1,0 +1,22 @@
+{
+  "eval_id": 3,
+  "eval_name": "ambiguous-input",
+  "prompt": "Ask the agents about the thing we discussed",
+  "assertions": [
+    {
+      "id": "no-full-meeting",
+      "text": "Does NOT run a full board meeting immediately — no agent turn headers appear",
+      "type": "structural"
+    },
+    {
+      "id": "one-clarifying-question",
+      "text": "Asks exactly one clarifying question to understand what the user wants discussed",
+      "type": "structural"
+    },
+    {
+      "id": "no-interview",
+      "text": "Does not ask multiple questions or run an extended interview",
+      "type": "structural"
+    }
+  ]
+}

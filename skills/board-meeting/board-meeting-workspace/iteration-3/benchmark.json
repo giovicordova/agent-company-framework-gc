@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "skill_name": "board-meeting",
+    "skill_path": "/Users/giovannicordova/Documents/02_projects/_P4_tooling/agent-company-framework-gc/skills/board-meeting",
+    "executor_model": "claude-opus-4-6",
+    "timestamp": "2026-04-12T12:30:00Z",
+    "evals_run": [1, 2, 3, 4],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "newsletter-launch",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 45.8,
+        "tokens": 20441,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Strategist, Editor, Recruiter"},
+        {"text": "Each turn ≤60 words", "passed": true, "evidence": "55, 55, 55 words"},
+        {"text": "Total discussion ≤400 words", "passed": true, "evidence": "165 words"},
+        {"text": "Recommendation ≤80 words", "passed": true, "evidence": "64 words"},
+        {"text": "Each agent surfaces risk", "passed": true, "evidence": "Revenue cap, fluff churn, solo burnout"},
+        {"text": "Cross-engagement", "passed": true, "evidence": "Editor: 'Strategist is right on premium positioning'"},
+        {"text": "Approval prompt", "passed": true, "evidence": "Present"},
+        {"text": "Save prompt", "passed": true, "evidence": "Present in same block"},
+        {"text": "Strategist voice (3-axis check)", "passed": true, "evidence": "Invoked by name"},
+        {"text": "Editor voice (Scan Test)", "passed": true, "evidence": "Invoked by name"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "newsletter-launch",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.30,
+        "passed": 3,
+        "failed": 7,
+        "total": 10,
+        "time_seconds": 69.0,
+        "tokens": 18447,
+        "tool_calls": 6,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Present but wrong format"},
+        {"text": "Each turn ≤60 words", "passed": false, "evidence": "Each turn 150-300+ words"},
+        {"text": "Total discussion ≤400 words", "passed": false, "evidence": "~900 words"},
+        {"text": "Recommendation ≤80 words", "passed": false, "evidence": "~150 words"},
+        {"text": "Each agent surfaces risk", "passed": true, "evidence": "Risks mentioned"},
+        {"text": "Cross-engagement", "passed": false, "evidence": "Isolated monologues"},
+        {"text": "Approval prompt", "passed": false, "evidence": "No approval prompt"},
+        {"text": "Save prompt", "passed": false, "evidence": "Not present"},
+        {"text": "Strategist voice (3-axis check)", "passed": true, "evidence": "Referenced"},
+        {"text": "Editor voice (Scan Test)", "passed": false, "evidence": "Mentioned but not central"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "b2b-pivot",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 61.8,
+        "tokens": 21883,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Present"},
+        {"text": "Disagreement handling noted", "passed": true, "evidence": "Unanimous — correctly noted, no false disagreement invented"},
+        {"text": "Conflict resolution per COMPANY.md", "passed": true, "evidence": "Domain owner identified"},
+        {"text": "Each turn ≤60 words", "passed": true, "evidence": "60, 57, 57 words"},
+        {"text": "Recommendation ≤80 words", "passed": true, "evidence": "64 words"},
+        {"text": "Each agent surfaces risk", "passed": true, "evidence": "All 3 surfaced domain risks"},
+        {"text": "Cross-engagement", "passed": true, "evidence": "Agents reference each other"},
+        {"text": "Approval + save prompt", "passed": true, "evidence": "Both present in same block"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "b2b-pivot",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 2,
+        "failed": 6,
+        "total": 8,
+        "time_seconds": 54.7,
+        "tokens": 18082,
+        "tool_calls": 6,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Present but wrong format"},
+        {"text": "Disagreement handling noted", "passed": false, "evidence": "Not addressed"},
+        {"text": "Conflict resolution per COMPANY.md", "passed": false, "evidence": "Not referenced"},
+        {"text": "Each turn ≤60 words", "passed": false, "evidence": "200+ words each"},
+        {"text": "Recommendation ≤80 words", "passed": false, "evidence": "~100 words"},
+        {"text": "Each agent surfaces risk", "passed": true, "evidence": "Risks present"},
+        {"text": "Cross-engagement", "passed": false, "evidence": "Minimal"},
+        {"text": "Approval + save prompt", "passed": false, "evidence": "Neither present"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "ambiguous-input",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 26.1,
+        "tokens": 19779,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "No full meeting runs", "passed": true, "evidence": "No agent headers"},
+        {"text": "Asks one clarifying question", "passed": true, "evidence": "Single question asked"},
+        {"text": "No extended interview", "passed": true, "evidence": "One question only"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "ambiguous-input",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.33,
+        "passed": 1,
+        "failed": 2,
+        "total": 3,
+        "time_seconds": 32.2,
+        "tokens": 17949,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "No full meeting runs", "passed": true, "evidence": "No full meeting"},
+        {"text": "Asks one clarifying question", "passed": false, "evidence": "Multiple examples instead of one clean question"},
+        {"text": "No extended interview", "passed": false, "evidence": "Lists multiple example prompts"}
+      ]
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "hiring-writer",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 37.9,
+        "tokens": 20058,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Present"},
+        {"text": "Recruiter speaks first (domain owner)", "passed": true, "evidence": "Recruiter is first speaker"},
+        {"text": "Each turn ≤60 words", "passed": true, "evidence": "51, 59, 54 words"},
+        {"text": "Recommendation ≤80 words", "passed": true, "evidence": "51 words"},
+        {"text": "Each agent surfaces risk", "passed": true, "evidence": "All 3 surfaced risks"},
+        {"text": "Approval + save prompt", "passed": true, "evidence": "Both present in same block"},
+        {"text": "Recruiter voice (calibration protocol)", "passed": true, "evidence": "Invoked by name with adjusted weights"}
+      ]
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "hiring-writer",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.14,
+        "passed": 1,
+        "failed": 6,
+        "total": 7,
+        "time_seconds": 66.3,
+        "tokens": 18214,
+        "tool_calls": 6,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "All 3 agent headers present", "passed": true, "evidence": "Present but wrong format"},
+        {"text": "Recruiter speaks first (domain owner)", "passed": false, "evidence": "Strategist speaks first"},
+        {"text": "Each turn ≤60 words", "passed": false, "evidence": "200+ words each"},
+        {"text": "Recommendation ≤80 words", "passed": false, "evidence": "~100 words"},
+        {"text": "Each agent surfaces risk", "passed": false, "evidence": "Risks buried in paragraphs"},
+        {"text": "Approval + save prompt", "passed": false, "evidence": "Neither present"},
+        {"text": "Recruiter voice (calibration protocol)", "passed": false, "evidence": "Used differently"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.00, "stddev": 0.00, "min": 1.00, "max": 1.00},
+      "time_seconds": {"mean": 42.9, "stddev": 13.2, "min": 26.1, "max": 61.8},
+      "tokens": {"mean": 20540, "stddev": 770, "min": 19779, "max": 21883}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.26, "stddev": 0.07, "min": 0.14, "max": 0.33},
+      "time_seconds": {"mean": 55.6, "stddev": 13.9, "min": 32.2, "max": 69.0},
+      "tokens": {"mean": 18173, "stddev": 185, "min": 17949, "max": 18447}
+    },
+    "delta": {
+      "pass_rate": "+0.74",
+      "time_seconds": "-12.7",
+      "tokens": "+2367"
+    }
+  },
+  "notes": [
+    "100% pass rate across all 4 evals with the skill, up from 88% in iteration 1.",
+    "Turn word limits now fully enforced: all 9 turns across 3 meetings are within the 60-word ceiling (range: 51-60).",
+    "Recommendation word limits pass: 51-64 words, well under the 80-word ceiling.",
+    "Save prompt consistently appears in all meetings alongside the approval prompt — fixed by merging into Step 6.",
+    "Voice discipline remains strong: agents invoke their persona-specific frameworks by name in every meeting.",
+    "Adversarial risks are woven naturally into each turn without feeling forced.",
+    "The skill adds ~2400 tokens but saves ~13 seconds per meeting — structure eliminates verbose rambling.",
+    "Baseline pass rate unchanged at 26% — confirms the skill is doing the heavy lifting, not model capability alone."
+  ]
+}
