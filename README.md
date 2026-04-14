@@ -1,10 +1,10 @@
 # Agent Company Framework
 
-Three Claude Code skills that build and run teams of project-specific AI agents as **native Claude Code subagents with persistent memory**.
+Three skills for building and running project-specific agent teams as native Claude Code subagents with persistent memory.
 
-- **`/agent-company-creator`** — Design a team, generate tested subagents, cross-check boundaries. Interactive → autonomous → validated.
-- **`/send-brief`** — Formalise conversation context into a polished brief and dispatch a live subagent in-session.
-- **`/board-meeting`** — Round-table: each agent speaks as a real subagent, sequential threaded dispatch, unified recommendation.
+- **`/agent-company-creator`** — Design, generate, and validate a team. Interactive design → autonomous build → tested delivery.
+- **`/send-brief`** — Turn conversation into a structured brief and dispatch a subagent in-session.
+- **`/board-meeting`** — Sequential round-table across all agents, unified recommendation.
 
 ## Architecture
 
@@ -20,16 +20,16 @@ COMPANY.md                   # Roster + ownership map + conflict-resolution rule
 CLAUDE.md                    # Project instructions; imports COMPANY.md
 ```
 
-No `agent-company/` folder, no mailbox, no knowledge folders, no hand-written `mistakes.md`. All of it is replaced by Claude Code's native subagent primitives introduced in 2026.
+No mailbox, no knowledge folders, no hand-written `mistakes.md` — replaced by Claude Code's native subagent primitives.
 
 ## Design principles
 
-- Agents are native Claude Code subagents — Claude Code's `description` frontmatter auto-routes requests.
-- `memory: project` gives each subagent a persistent directory at `.claude/agent-memory/{name}/` that it curates itself.
-- Every agent is project-specific — no generic roles.
-- Explicit ownership boundaries with handoff rules. No overlaps.
-- Personas are tested with real subagent dispatch before delivery (domain competence, boundary respect, handoff recognition).
-- Cross-agent durable facts live in `CLAUDE.md` (auto-loaded by every session and every subagent).
+- Native subagents — `description` frontmatter auto-routes.
+- `memory: project` — each agent curates `.claude/agent-memory/{name}/` itself.
+- Project-specific personas. No generic roles.
+- Explicit ownership, defined handoffs, zero overlap.
+- Personas validated via real dispatch before delivery.
+- Durable cross-agent facts live in `CLAUDE.md`, auto-loaded everywhere.
 
 ## Install
 
@@ -52,7 +52,7 @@ ln -sfn "$PWD/skills/send-brief"            ~/.claude/skills/send-brief
 ln -sfn "$PWD/skills/board-meeting"         ~/.claude/skills/board-meeting
 ```
 
-Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 2.1.59+ (for `memory:` frontmatter) and `jq` (for the eval harness).
+Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 2.1.59+ (`memory:` frontmatter) and `jq` (evals).
 
 ## Quick start
 
@@ -78,15 +78,13 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 2.1.59+ (
 ./evals/run.sh
 ```
 
-Runs all three skills' eval cases through `claude -p`, grades via a judge pass, writes `evals/last-run.md`, compares against `evals/baseline.json`. Regressions beyond tolerance (default ±1 expectation per case) exit non-zero.
-
-See `evals/README.md` for details and known limitations.
+Runs every skill's cases through `claude -p`, judge-grades, writes `evals/last-run.md`, diffs against `evals/baseline.json`. Regressions beyond ±1 expectation per case exit non-zero. See `evals/README.md` for details.
 
 ## Maintenance
 
-- Run `./evals/run.sh` before committing any skill edit. Don't commit on regression.
-- When a subagent misbehaves twice on the same thing, fix it in `.claude/agents/{name}.md` — not in a wrapper skill.
-- Each agent's `MEMORY.md` is auto-curated by the agent. Review it periodically — if an agent's memory drifts off-topic, that's a signal the persona or description needs revising.
-- Durable cross-agent facts go in `CLAUDE.md`. If it grows past ~150 lines, split into `.claude/rules/*.md`.
+- `./evals/run.sh` before every skill edit. No commit on regression.
+- Recurring misbehaviour → fix `.claude/agents/{name}.md`, not a wrapper skill.
+- Review each agent's `MEMORY.md` periodically. Drift signals a persona or description problem.
+- Cross-agent facts in `CLAUDE.md`. Past ~150 lines, split into `.claude/rules/*.md`.
 
 MIT

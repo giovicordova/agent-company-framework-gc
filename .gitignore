@@ -1,38 +1,17 @@
 # Ignore everything by default.
 *
 
-# Framework source
+# Public surface: skills + README only
 !README.md
-!CLAUDE.md
-!CHECKPOINTS.md
 !.gitignore
-
 !skills/
 !skills/**
 
-# Native subagents and COMPANY.md (committed as reference examples)
-!.claude/
-!.claude/agents/
-!.claude/agents/**
-!COMPANY.md
-
-# Eval harness and baseline (but not per-run artefacts)
-!evals/
-!evals/**
-evals/results/
-
-# Per-run and workspace noise
-**/board-meeting-workspace/
-**/*-workspace/
-
-# Personal eval cases (project-specific examples) — run.sh handles absence
+# Personal eval cases (project-specific examples) stay local
 skills/agent-company-creator/evals/
 skills/board-meeting/evals/
 
-# Per-user state stays local
-.claude/agent-memory/
-.claude/agent-memory-local/
-.claude/skills/
-.claude/settings.json
-.claude/settings.local.json
-agent-company.legacy/
+# Workspace and run artefacts even under whitelists
+**/board-meeting-workspace/
+**/*-workspace/
+**/calibration-responses.md
