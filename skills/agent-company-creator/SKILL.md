@@ -173,7 +173,11 @@ Do NOT include a "Source of Truth" section — the Standing Instructions and nat
 Do NOT create any directories under `agent-company/` — that pattern is obsolete.
 ```
 
-### Step 2.2 — Test each subagent with real dispatch
+### Step 2.2 — Reload subagents into the session
+
+Claude Code loads subagents at session start. Files written during Step 2.1 are on disk but not yet addressable in this session. Before dispatching, tell the user to run `/agents` in the CLI, which reloads the registry from disk without a restart. Wait for them to confirm it has run, then proceed to Step 2.3. Do not attempt a fresh-session handoff — it breaks the skill in half.
+
+### Step 2.3 — Test each subagent with real dispatch
 
 Testing must be real, not narrated. You now have native subagents — dispatch them via the Agent tool with `subagent_type: {lowercase_name}` and grade their responses.
 
@@ -218,7 +222,7 @@ After each dispatch completes, grade each answer. A response passes if it:
 - Maintains the defined voice
 - Flags the need to verify on research-first questions
 
-### Step 2.3 — Iterate on failures
+### Step 2.4 — Iterate on failures
 
 If any calibration question fails:
 1. Identify the root cause — persona too vague? Missing framework? Boundary not clear? Description too loose for auto-routing?
