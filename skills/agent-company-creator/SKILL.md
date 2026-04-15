@@ -35,6 +35,16 @@ Draft a roster. For each role: one-line identity, one-line boundary. Then defend
 
 Share with the user. Steel-man their instinct, then stress-test it. If they proposed three agents and the project actually needs four, argue for four with reasoning. Revise once if they push back. Don't write any agent files until the team shape is agreed.
 
+### 2.5 Verify against current docs (preflight)
+
+Before writing any agent files, fetch `https://code.claude.com/docs/llms.txt` and open the `sub-agents` and `skills` pages. Confirm:
+
+- The frontmatter fields in `references/agent-schema.md` (`name`, `description`, `tools`, `model`, `memory`) are all still valid and named the same.
+- The `memory:` field still accepts `user | project | local` and still stores to `.claude/agent-memory/<name>/` for the project scope.
+- No new required field has been added.
+
+If anything has shifted, note the drift in the activation summary and prefer the docs over `references/agent-schema.md`. Do not silently rewrite the reference file — flag it for Giovanni to update by hand.
+
 ### 3. Write the agents (parallel)
 
 Dispatch one general-purpose subagent per role in a single turn. Each receives:

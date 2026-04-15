@@ -1,5 +1,8 @@
 # Agent Schema
 
+> Canonical source: https://code.claude.com/docs/en/sub-agents.md
+> If the docs disagree with anything below, the docs win. Flag drift to Giovanni.
+
 The machine contract every agent file must follow. Claude Code reads the frontmatter to decide routing, memory activation, and tool access. The markdown body is what the dispatched agent sees as its system prompt. Treat the schema as a hard contract — deviations break routing, memory, or both.
 
 ## Frontmatter
