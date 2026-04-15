@@ -11,6 +11,7 @@
 
 # Skill-specific eval cases stay local
 skills/**/evals/
+skills/**/*-workspace/
 
 # Run artefacts even under whitelists
 **/calibration-responses.md
