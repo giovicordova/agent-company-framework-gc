@@ -1,36 +1,21 @@
 # Agent Company Framework
 
-Two skills for building and running project-specific agent teams as native Claude Code subagents with persistent memory.
+Two skills for designing and running project-specific teams of Claude Code subagents.
 
-- **`/agent-company-creator`** — Design, generate, and validate a team. Interactive design → autonomous build → tested delivery.
-- **`/board-meeting`** — Sequential round-table across all agents, unified recommendation.
+- **`/agent-company-creator`** — Designs the team. Interviews you about the project, proposes a roster with a sizing argument, and writes a single `COMPANY.md` with paste-ready descriptions for Claude Code's built-in `/agents` command.
+- **`/board-meeting`** — Convenes every agent in `.claude/agents/` as a sequential round-table, threading prior turns into each next prompt, and synthesises a board recommendation.
 
 Structured handoff to a single agent uses Claude Code's native subagent dispatch — no dedicated skill needed.
 
-## Architecture
+## What the creator skill does (and doesn't)
 
-```
-.claude/
-  agents/
-    {agent}.md               # YAML frontmatter (name/description/tools/model/memory) + 6 body sections
-  agent-memory/
-    {agent}/                 # Claude Code manages this automatically (memory: project)
-      MEMORY.md              # Auto-curated index, loaded into every dispatch
+It designs the team and writes the blueprint. It does **not** scaffold agent files.
 
-COMPANY.md                   # Roster + ownership map + conflict-resolution rules
-CLAUDE.md                    # Project instructions; imports COMPANY.md
-```
+1. `/agent-company-creator` interviews you and writes `COMPANY.md` at the project root.
+2. `COMPANY.md` contains, for each agent, a self-contained "Description for `/agents`" block.
+3. You create each agent with Claude Code's built-in `/agents` command, pasting the description.
 
-No mailbox, no knowledge folders, no hand-written `mistakes.md` — replaced by Claude Code's native subagent primitives.
-
-## Design principles
-
-- Native subagents — `description` frontmatter auto-routes.
-- `memory: project` — each agent curates `.claude/agent-memory/{name}/` itself.
-- Project-specific personas. No generic roles.
-- Explicit ownership, defined handoffs, zero overlap.
-- Personas validated via real dispatch before delivery.
-- Durable cross-agent facts live in `CLAUDE.md`, auto-loaded everywhere.
+The hard part of an agent company is the design — which roles need to exist, where the boundaries fall, what happens when territory overlaps. File creation is already handled well by `/agents`.
 
 ## Install
 
@@ -51,20 +36,26 @@ ln -sfn "$PWD/skills/agent-company-creator" ~/.claude/skills/agent-company-creat
 ln -sfn "$PWD/skills/board-meeting"         ~/.claude/skills/board-meeting
 ```
 
-Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 2.1.59+ (`memory:` frontmatter) and `jq` (evals).
+Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and `jq` (for evals).
 
 ## Quick start
 
 ```bash
-# 1. Open your project in Claude Code
-# 2. Create the team
+# 1. Open your project in Claude Code.
+# 2. Design the team.
 /agent-company-creator
+#    → produces COMPANY.md at the project root.
 
-# 3. Work with an agent directly — Claude auto-routes via frontmatter description
-# "Editor, scan-test this paragraph: ..."
-# "Strategist, what's the moat on this?"
+# 3. Create each agent with Claude Code's built-in command.
+/agents
+#    → for each entry in COMPANY.md, give the agent its name and paste the
+#      "Description for /agents" block. Repeat per agent.
 
-# 4. Get the whole board on a decision
+# 4. Work with an agent directly — Claude auto-routes via frontmatter description.
+#    "Editor, scan-test this paragraph: ..."
+#    "Strategist, what's the moat on this?"
+
+# 5. Get the whole board on a decision.
 /board-meeting
 ```
 
@@ -79,8 +70,7 @@ Runs every skill's cases through `claude -p`, judge-grades, writes `evals/last-r
 ## Maintenance
 
 - `./evals/run.sh` before every skill edit. No commit on regression.
-- Recurring misbehaviour → fix `.claude/agents/{name}.md`, not a wrapper skill.
-- Review each agent's `MEMORY.md` periodically. Drift signals a persona or description problem.
-- Cross-agent facts in `CLAUDE.md`. Past ~150 lines, split into `.claude/rules/*.md`.
+- If a team's routing or boundaries drift, rerun `/agent-company-creator` to redesign, then recreate agents with `/agents`.
+- Recurring misbehaviour in a single agent → edit its file in `.claude/agents/{name}.md`, not the skill.
 
 MIT

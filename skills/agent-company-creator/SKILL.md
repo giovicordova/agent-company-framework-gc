@@ -1,15 +1,15 @@
 ---
 name: agent-company-creator
-description: Design the optimal team of AI agents for any project and produce a COMPANY.md blueprint. Use when the user wants to create an agent team, assemble a company of agents, set up domain specialists, build an agent company, or says things like "I need agents for my project", "create a team for this", "set up my agent company", "design agents for [project]", "I want specialists working on this", or "agent-company-creator". Also triggers when the user describes a project and implies they need multiple AI personas collaborating, or when they want to redesign an existing agent company. Produces a COMPANY.md with agent descriptions ready to paste directly into Claude Code's built-in `/agent` command. Does NOT create agent files — the user creates each agent via `/agent` using the descriptions from COMPANY.md.
+description: Design the optimal team of AI agents for any project and produce a COMPANY.md blueprint. Use when the user wants to create an agent team, assemble a company of agents, set up domain specialists, build an agent company, or says things like "I need agents for my project", "create a team for this", "set up my agent company", "design agents for [project]", "I want specialists working on this", or "agent-company-creator". Also triggers when the user describes a project and implies they need multiple AI personas collaborating, or when they want to redesign an existing agent company. Produces a COMPANY.md with agent descriptions ready to paste directly into Claude Code's built-in `/agents` command. Does NOT create agent files — the user creates each agent via `/agents` using the descriptions from COMPANY.md.
 ---
 
 # Agent Company Creator
 
-Design the right team of AI agents for a project. Output: a single `COMPANY.md` at the project root — a blueprint the user walks through with `/agent` to create each agent.
+Design the right team of AI agents for a project. Output: a single `COMPANY.md` at the project root — a blueprint the user walks through with `/agents` to create each agent.
 
 ## Why design matters more than scaffolding
 
-Claude Code's `/agent` command handles agent creation well. What it can't do is think about the whole team at once — which roles actually need to exist, where the boundaries fall, what happens when two agents' territory overlaps. That's what this skill does. The hard part of an agent company is the design, not the files.
+Claude Code's `/agents` command handles agent creation well. What it can't do is think about the whole team at once — which roles actually need to exist, where the boundaries fall, what happens when two agents' territory overlaps. That's what this skill does. The hard part of an agent company is the design, not the files.
 
 ## Pipeline
 
@@ -54,11 +54,11 @@ For each agent, write an entry like this:
 
 **Hands off to:** Which agent(s) and under what conditions.
 
-**Description for `/agent`:**
-> [A complete, self-contained description paragraph that can be pasted directly into `/agent` when creating this agent. This should include: the agent's role, what it's an expert in, what tools it should have access to, what it owns, what it defers, and its working style. Written in second person ("You are..."). Should work as a standalone agent prompt without needing the rest of COMPANY.md for context.]
+**Description for `/agents`:**
+> [A complete, self-contained description paragraph that can be pasted directly into `/agents` when creating this agent. This should include: the agent's role, what it's an expert in, what tools it should have access to, what it owns, what it defers, and its working style. Written in second person ("You are..."). Should work as a standalone agent prompt without needing the rest of COMPANY.md for context.]
 ```
 
-The "Description for `/agent`" block is the most important part. It needs to be good enough that someone can copy it verbatim into `/agent` and get a well-scoped, well-behaved agent. That means:
+The "Description for `/agents`" block is the most important part. It needs to be good enough that someone can copy it verbatim into `/agents` and get a well-scoped, well-behaved agent. That means:
 - Self-contained — doesn't reference COMPANY.md sections the agent won't see
 - Specific to the project domain — not generic "business analyst" language
 - Includes tool scoping guidance (e.g., "You read and advise but do not edit files directly")
@@ -87,7 +87,7 @@ This section only matters for teams of 2+ agents with adjacent territory. For ve
 Tell the user:
 - What was written and where
 - How many agents, with names
-- How to create each agent: run `/agent`, give it the name, paste the "Description for `/agent`" block
+- How to create each agent: run `/agents`, give it the name, paste the "Description for `/agents`" block
 - Any orphan concerns they should be aware of
 
 ## Hard constraints
@@ -95,7 +95,7 @@ Tell the user:
 - **One output file: `COMPANY.md` at project root.** No agent files, no calibration files, no activation summaries.
 - **No generic personas.** "Content writer" that would fit any company is a failure. Every agent must reference the project's actual domain, tools, terminology, and workflows.
 - **No overlapping ownership.** If two agents could plausibly claim the same concern, the ownership map has a bug. Fix it.
-- **The `/agent` description must stand alone.** It will be pasted into a prompt field with no surrounding context. It cannot depend on COMPANY.md being loaded.
+- **The `/agents` description must stand alone.** It will be pasted into a prompt field with no surrounding context. It cannot depend on COMPANY.md being loaded.
 - **Defend the team size.** "We have four agents" without argument is not a design — it's a guess.
 
 ## Failure modes to guard against
@@ -103,5 +103,5 @@ Tell the user:
 - **Too many agents.** More agents means more handoff friction, more routing ambiguity, more maintenance. The default instinct is to add roles; push against it. Every agent must catch a failure mode that the others can't.
 - **Too few agents.** Cramming distinct modes of attention into one agent produces a generalist that does nothing well. If two concerns have different sources of truth or different working styles, they probably need different agents.
 - **Vague boundaries.** "Handles marketing" is not a boundary. "Owns social copy and scheduling; does not own brand strategy or paid ads" is a boundary.
-- **Descriptions that reference COMPANY.md.** The `/agent` description field is the agent's entire world. If it says "see ownership map" or "per COMPANY.md", that reference will be invisible to the agent.
+- **Descriptions that reference COMPANY.md.** The `/agents` description field is the agent's entire world. If it says "see ownership map" or "per COMPANY.md", that reference will be invisible to the agent.
 - **Skipped sizing rationale.** The sizing argument is what turns a list of roles into a team design. Without it, there's no way to evaluate whether the team is right-sized.
