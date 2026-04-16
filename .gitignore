@@ -1,15 +1,13 @@
 # Ignore everything by default.
 *
 
-# Public surface: skills + root evals + README only
+# Public surface: skills + README only
 !README.md
 !.gitignore
 !skills/
 !skills/**
-!evals/
-!evals/**
 
-# Skill-specific eval cases stay local
+# Skill-local eval cases and workspaces stay out of the public repo
 skills/**/evals/
 skills/**/*-workspace/
 

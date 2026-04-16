@@ -36,7 +36,7 @@ ln -sfn "$PWD/skills/agent-company-creator" ~/.claude/skills/agent-company-creat
 ln -sfn "$PWD/skills/board-meeting"         ~/.claude/skills/board-meeting
 ```
 
-Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and `jq` (for evals).
+Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
 ## Quick start
 
@@ -59,17 +59,8 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and `jq` 
 /board-meeting
 ```
 
-## Evals
-
-```bash
-./evals/run.sh
-```
-
-Runs every skill's cases through `claude -p`, judge-grades, writes `evals/last-run.md`, diffs against `evals/baseline.json`. Regressions beyond ±1 expectation per case exit non-zero. See `evals/README.md` for details.
-
 ## Maintenance
 
-- `./evals/run.sh` before every skill edit. No commit on regression.
 - If a team's routing or boundaries drift, rerun `/agent-company-creator` to redesign, then recreate agents with `/agents`.
 - Recurring misbehaviour in a single agent → edit its file in `.claude/agents/{name}.md`, not the skill.
 
